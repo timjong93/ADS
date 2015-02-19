@@ -1,37 +1,140 @@
 package com.timtom;
 
-import java.sql.*;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.GregorianCalendar;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-import java.util.Properties;
-import java.util.concurrent.locks.Condition;
-import java.util.concurrent.locks.Lock;
-import java.util.concurrent.locks.ReentrantLock;
+import java.sql.CallableStatement;
+import java.sql.Connection;
+import java.sql.Date;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 public class DatabaseHelper
 {
-    private static DatabaseHelper dbHelper;
-    private Connection conn;
+	private static DatabaseHelper dbHelper;
+	private Connection conn;
 
+	// TABLES
+	private static String artistTable = "artist";
+	private static String productTable = "product";
 
-    public DatabaseHelper() throws SQLException {
-        try {
-            Class.forName("org.postgresql.Driver").newInstance();
-            conn = DriverManager.getConnection(
-                    "jdbc:postgresql://localhost:5432/ADT","ADT", "");
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        } catch (InstantiationException e) {
-            e.printStackTrace();
-        } catch (IllegalAccessException e) {
-            e.printStackTrace();
-        }
+	// Artist COLUMNS
+	private static String firstNameCol = "firstname";
+	private static String lastNameCol = "lastname";
 
-    }
+	private DatabaseHelper() throws SQLException
+	{
+		try
+		{
+			Class.forName("org.postgresql.Driver");
+			conn = DriverManager.getConnection("jdbc:postgresql://localhost:5432/ADT", "postgres", "Bonkus");
+		} catch (ClassNotFoundException e)
+		{
+			e.printStackTrace();
+		}
+	}
+
+	public static DatabaseHelper getDatabaseHelper()
+	{
+		if (dbHelper == null)
+		{
+			try
+			{
+				dbHelper = new DatabaseHelper();
+			} catch (SQLException e)
+			{
+				e.printStackTrace();
+			}
+		}
+
+		return dbHelper;
+	}
+
+	public int insertArtist(String firstname, String lastName)
+	{
+		PreparedStatement statement = null;
+
+		try
+		{
+			String insertArticle = "INSERT INTO " + artistTable + " (" + firstNameCol + ", " + lastNameCol + ")" + " VALUES (?,?)";
+
+			statement = conn.prepareStatement(insertArticle);
+
+			statement.setString(1, firstname);
+			statement.setString(2, lastName);
+
+			int id = statement.executeUpdate();
+			ResultSet rs = statement.getGeneratedKeys();
+
+			if (rs.next())
+			{
+				id = rs.getInt(1);
+			}
+
+			rs.close();
+			statement.close();
+			return id;
+		} catch (SQLException e)
+		{
+			System.err.println("[ERROR] fout in de DB");
+			e.printStackTrace();
+		} finally
+		{
+			if (statement != null)
+				try
+				{
+					statement.close();
+				} catch (SQLException e)
+				{
+					e.printStackTrace();
+				}
+		}
+		return -1;
+	}
+
+	public int insertAlbum(int artistId, String publisher, String name, Date releaseDate)
+	{
+		CallableStatement statement = null;
+
+		try
+		{
+			String procedure = "{call add_album(?,?,?,?)}";
+
+			statement = conn.prepareCall(procedure);
+
+			statement.setInt(1, artistId);
+			statement.setString(2, publisher);
+			statement.setString(3, name);
+			statement.setDate(4, releaseDate);
+
+			statement.execute();
+
+			ResultSet rs = statement.getResultSet();
+
+			int id = -1;
+
+			while (rs.next())
+			{
+				id = rs.getInt(1);
+			}
+
+			rs.close();
+			statement.close();
+			return id;
+		} catch (SQLException e)
+		{
+			System.err.println("[ERROR] fout in de DB");
+			e.printStackTrace();
+		} finally
+		{
+			if (statement != null)
+				try
+				{
+					statement.close();
+				} catch (SQLException e)
+				{
+					e.printStackTrace();
+				}
+		}
+		return -1;
+	}
 }
