@@ -2,18 +2,19 @@ package com.timtom.commands;
 
 import java.util.Scanner;
 
-public class AddCustomer extends Command
+public class ExitCommand extends Command
 {
 
-	public AddCustomer()
+	public ExitCommand()
 	{
-		super("Add Customer");
+		super("Do Nothing, Quit");
 		// TODO Auto-generated constructor stub
 	}
 
 	@Override
 	public Object execute(Scanner scanner)
 	{
-		return null;
+		return "EXITLOOP";
 	}
+
 }

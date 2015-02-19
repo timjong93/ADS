@@ -17,7 +17,7 @@ public class AddAlbum extends Command
 		// TODO Auto-generated constructor stub
 	}
 
-	public void execute(Scanner scanner)
+	public Object execute(Scanner scanner)
 	{
 		System.out.println("Please enter the following artist data:");
 		System.out.println("Artist ID:");
@@ -47,5 +47,6 @@ public class AddAlbum extends Command
 
 		System.out.println("Album generated with id: " + id);
 
+		return id;
 	}
 }

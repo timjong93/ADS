@@ -26,7 +26,7 @@ public class DatabaseHelper
 		try
 		{
 			Class.forName("org.postgresql.Driver");
-			conn = DriverManager.getConnection("jdbc:postgresql://localhost:5432/ADT", "postgres", "Bonkus");
+			conn = DriverManager.getConnection("jdbc:postgresql://localhost:5432/ADT", "ADT", "ADT");
 		} catch (ClassNotFoundException e)
 		{
 			e.printStackTrace();

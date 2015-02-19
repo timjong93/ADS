@@ -5,20 +5,24 @@ import java.util.Scanner;
 /**
  * Created by Tim on 12-2-2015.
  */
-public class Command  {
+public class Command
+{
 
-    private String Description;
+	private String Description;
 
+	public Command(String description)
+	{
+		Description = description;
+	}
 
-    public Command(String description) {
-        Description = description;
-    }
+	public String getDescription()
+	{
+		return Description;
+	}
 
-    public String getDescription() {
-        return Description;
-    }
-
-    public void execute(Scanner scanner){
-        System.err.println("not yet implemented");
-    }
+	public Object execute(Scanner scanner)
+	{
+		System.err.println("Not Yet Implemented");
+		return null;
+	}
 }

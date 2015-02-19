@@ -16,7 +16,7 @@ public class AddArtist extends Command
 	}
 
 	@Override
-	public void execute(Scanner scanner)
+	public Object execute(Scanner scanner)
 	{
 		System.out.println("Please enter the following artist data:");
 		System.out.println("First name:");
@@ -26,5 +26,6 @@ public class AddArtist extends Command
 
 		System.out.println("Created Artist with id: " + DatabaseHelper.getDatabaseHelper().insertArtist(firstName, lastName));
 
+		return null;
 	}
 }

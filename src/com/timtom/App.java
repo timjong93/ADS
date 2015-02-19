@@ -1,12 +1,13 @@
 package com.timtom;
 
-import java.util.ArrayList;
 import java.util.Scanner;
 
 import com.timtom.commands.AddAlbum;
 import com.timtom.commands.AddArtist;
 import com.timtom.commands.AddCustomer;
-import com.timtom.commands.Command;
+import com.timtom.commands.AddMovie;
+import com.timtom.commands.CommandList;
+import com.timtom.commands.ExitCommand;
 
 /**
  * Created by Tim on 12-2-2015.
@@ -15,15 +16,17 @@ public class App
 {
 
 	private Scanner scanner;
-	private ArrayList<Command> commandList;
+	private CommandList commandList;
 
 	public App()
 	{
 		scanner = new Scanner(System.in);
-		commandList = new ArrayList<Command>();
-		commandList.add(new AddArtist());
-		commandList.add(new AddCustomer());
-		commandList.add(new AddAlbum());
+		commandList = new CommandList();
+		commandList.addCommand(new AddArtist());
+		commandList.addCommand(new AddCustomer());
+		commandList.addCommand(new AddAlbum());
+		commandList.addCommand(new AddMovie());
+		commandList.addCommand(new ExitCommand());
 		execute();
 
 		DatabaseHelper.getDatabaseHelper();
@@ -40,25 +43,12 @@ public class App
 		printWelcomeText();
 		while (true)
 		{
-			printMenu();
-			int i = scanner.nextInt();
-			if (i - 1 < commandList.size())
+			Object result = commandList.ExecuteCommand(scanner);
+
+			if (result instanceof String && ((String) result).equals("EXITLOOP"))
 			{
-				commandList.get(i - 1).execute(scanner);
-			} else
-			{
-				System.err.println("invalid choice");
+				break;
 			}
 		}
 	}
-
-	public void printMenu()
-	{
-		System.out.println("Please make a choice from the menu");
-		for (int i = 0; i < commandList.size(); i++)
-		{
-			System.out.println(String.format("%d).\t%s", i + 1, commandList.get(i).getDescription()));
-		}
-	}
-
 }
