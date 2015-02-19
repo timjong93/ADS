@@ -6,7 +6,7 @@ import java.util.Scanner;
 public class AddMovie extends Command
 {
 
-	CommandList subMenuArtist;
+	CommandList subMenuArtist = new CommandList();
 
 	public AddMovie()
 	{
@@ -24,7 +24,7 @@ public class AddMovie extends Command
 		String name = scanner.nextLine();
 		System.out.println("Publisher:");
 		String publisher = scanner.next();
-		System.out.println("duration");
+		System.out.println("Duration:");
 		int duration = scanner.nextInt();
 
 		ArrayList<Integer> artists = new ArrayList<Integer>();
