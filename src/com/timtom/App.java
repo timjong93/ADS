@@ -24,6 +24,7 @@ public class App
 		commandList.add(new AddArtist());
 		commandList.add(new AddCustomer());
 		commandList.add(new AddAlbum());
+        commandList.add(new AddCustomer());
 		execute();
 
 		DatabaseHelper.getDatabaseHelper();
