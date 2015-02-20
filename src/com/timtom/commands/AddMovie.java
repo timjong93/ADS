@@ -3,6 +3,8 @@ package com.timtom.commands;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import com.timtom.DatabaseHelper;
+
 public class AddMovie extends Command
 {
 
@@ -41,6 +43,9 @@ public class AddMovie extends Command
 			}
 		}
 
-		return null;
+		int id = DatabaseHelper.getDatabaseHelper().insertMovie(publisher, name, duration, artists);
+
+		System.out.println("Created a movie with id: " + id);
+		return id;
 	}
 }

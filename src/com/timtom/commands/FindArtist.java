@@ -13,8 +13,8 @@ public class FindArtist extends Command
 	@Override
 	public Object execute(Scanner scanner)
 	{
-		// TODO Auto-generated method stub
-		return super.execute(scanner);
+		System.out.println("artist id:");
+		return scanner.nextInt();
 	}
 
 }

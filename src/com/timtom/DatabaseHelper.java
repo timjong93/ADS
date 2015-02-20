@@ -1,5 +1,6 @@
 package com.timtom;
 
+import java.sql.Array;
 import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.Date;
@@ -7,6 +8,8 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Types;
+import java.util.ArrayList;
 
 public class DatabaseHelper
 {
@@ -16,12 +19,12 @@ public class DatabaseHelper
 	// TABLES
 	private static String artistTable = "artist";
 	private static String productTable = "product";
-    private static String customerTable = "customer";
+	private static String customerTable = "customer";
 
 	// Artist COLUMNS
 	private static String firstNameCol = "firstname";
 	private static String lastNameCol = "lastname";
-    private static String mailAdressCol = "mailAdress";
+	private static String mailAdressCol = "mailAdress";
 
 	private DatabaseHelper() throws SQLException
 	{
@@ -93,48 +96,48 @@ public class DatabaseHelper
 		return -1;
 	}
 
-    public int insertCustomer(String firstname, String lastName, String mailAdress)
-    {
-        PreparedStatement statement = null;
+	public int insertCustomer(String firstname, String lastName, String mailAdress)
+	{
+		PreparedStatement statement = null;
 
-        try
-        {
-            String insertArticle = "INSERT INTO " + customerTable + " (" + firstNameCol + ", " + lastNameCol + ", " + mailAdressCol +")" + " VALUES (?,?,?)";
+		try
+		{
+			String insertArticle = "INSERT INTO " + customerTable + " (" + firstNameCol + ", " + lastNameCol + ", " + mailAdressCol + ")" + " VALUES (?,?,?)";
 
-            statement = conn.prepareStatement(insertArticle);
+			statement = conn.prepareStatement(insertArticle);
 
-            statement.setString(1, firstname);
-            statement.setString(2, lastName);
-            statement.setString(3, mailAdress);
+			statement.setString(1, firstname);
+			statement.setString(2, lastName);
+			statement.setString(3, mailAdress);
 
-            int id = statement.executeUpdate();
-            ResultSet rs = statement.getGeneratedKeys();
+			int id = statement.executeUpdate();
+			ResultSet rs = statement.getGeneratedKeys();
 
-            if (rs.next())
-            {
-                id = rs.getInt(1);
-            }
+			if (rs.next())
+			{
+				id = rs.getInt(1);
+			}
 
-            rs.close();
-            statement.close();
-            return id;
-        } catch (SQLException e)
-        {
-            System.err.println("[ERROR] fout in de DB");
-            e.printStackTrace();
-        } finally
-        {
-            if (statement != null)
-                try
-                {
-                    statement.close();
-                } catch (SQLException e)
-                {
-                    e.printStackTrace();
-                }
-        }
-        return -1;
-    }
+			rs.close();
+			statement.close();
+			return id;
+		} catch (SQLException e)
+		{
+			System.err.println("[ERROR] fout in de DB");
+			e.printStackTrace();
+		} finally
+		{
+			if (statement != null)
+				try
+				{
+					statement.close();
+				} catch (SQLException e)
+				{
+					e.printStackTrace();
+				}
+		}
+		return -1;
+	}
 
 	public int insertAlbum(int artistId, String publisher, String name, Date releaseDate)
 	{
@@ -181,5 +184,95 @@ public class DatabaseHelper
 				}
 		}
 		return -1;
+	}
+
+	public int insertMovie(String publisher, String name, int duration, ArrayList<Integer> artistids)
+	{
+		CallableStatement statement = null;
+
+		try
+		{
+			String procedure = "{call add_movie(?,?,?,?)}";
+
+			statement = conn.prepareCall(procedure);
+
+			statement.setString(1, publisher);
+			statement.setString(2, name);
+			statement.setInt(3, duration);
+			Array array = conn.createArrayOf("integer", artistids.toArray());
+			statement.setArray(4, array);
+
+			statement.execute();
+
+			ResultSet rs = statement.getResultSet();
+
+			int id = -1;
+
+			while (rs.next())
+			{
+				id = rs.getInt(1);
+			}
+
+			rs.close();
+			statement.close();
+			return id;
+		} catch (SQLException e)
+		{
+			System.err.println("[ERROR] fout in de DB");
+			e.printStackTrace();
+		} finally
+		{
+			if (statement != null)
+				try
+				{
+					statement.close();
+				} catch (SQLException e)
+				{
+					e.printStackTrace();
+				}
+		}
+		return -1;
+	}
+
+	public void insertProduct(int movieId, int albumId, int amount)
+	{
+		CallableStatement statement = null;
+
+		try
+		{
+			String procedure = "{call add_product(?,?,?)}";
+
+			statement = conn.prepareCall(procedure);
+
+			if (movieId != -1)
+				statement.setInt(1, movieId);
+			else
+				statement.setNull(1, Types.INTEGER);
+
+			if (albumId != -1)
+				statement.setInt(2, albumId);
+			else
+				statement.setNull(2, Types.INTEGER);
+
+			statement.setInt(3, amount);
+
+			statement.execute();
+
+			statement.close();
+		} catch (SQLException e)
+		{
+			System.err.println("[ERROR] fout in de DB");
+			e.printStackTrace();
+		} finally
+		{
+			if (statement != null)
+				try
+				{
+					statement.close();
+				} catch (SQLException e)
+				{
+					e.printStackTrace();
+				}
+		}
 	}
 }

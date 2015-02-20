@@ -24,8 +24,9 @@ public class AddArtist extends Command
 		System.out.println("Last name:");
 		String lastName = scanner.next();
 
-		System.out.println("Created Artist with id: " + DatabaseHelper.getDatabaseHelper().insertArtist(firstName, lastName));
+		int id = DatabaseHelper.getDatabaseHelper().insertArtist(firstName, lastName);
+		System.out.println("Created Artist with id: " + id);
 
-		return null;
+		return id;
 	}
 }
