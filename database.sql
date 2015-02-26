@@ -76,7 +76,7 @@ PRIMARY KEY ("id")
 
 CREATE TABLE "movie_artists" (
 "id_movie" INTEGER ,
-"id_artists" INTEGER 
+"id_artist" INTEGER 
 );
 
 CREATE TABLE "rental_history" (
@@ -101,7 +101,7 @@ ALTER TABLE "product" ADD FOREIGN KEY ("id_movie") REFERENCES "movie" ("id");
 ALTER TABLE "product" ADD FOREIGN KEY ("id_customer") REFERENCES "customer" ("id");
 ALTER TABLE "movie" ADD FOREIGN KEY ("name_publisher") REFERENCES "publisher" ("name");
 ALTER TABLE "movie_artists" ADD FOREIGN KEY ("id_movie") REFERENCES "movie" ("id");
-ALTER TABLE "movie_artists" ADD FOREIGN KEY ("id_artists") REFERENCES "artist" ("id");
+ALTER TABLE "movie_artists" ADD FOREIGN KEY ("id_artist") REFERENCES "artist" ("id");
 ALTER TABLE "rental_history" ADD FOREIGN KEY ("id_product") REFERENCES "product" ("id");
 ALTER TABLE "rental_history" ADD FOREIGN KEY ("id_customer") REFERENCES "customer" ("id");
 
