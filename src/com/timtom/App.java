@@ -7,6 +7,7 @@ import com.timtom.commands.AddArtist;
 import com.timtom.commands.AddCustomer;
 import com.timtom.commands.AddDVD;
 import com.timtom.commands.AddMovie;
+import com.timtom.commands.AddPublisher;
 import com.timtom.commands.CommandList;
 import com.timtom.commands.ExitCommand;
 
@@ -24,6 +25,7 @@ public class App
 		scanner = new Scanner(System.in);
 		commandList = new CommandList();
 		commandList.addCommand(new AddArtist());
+		commandList.addCommand(new AddPublisher());
 		commandList.addCommand(new AddCustomer());
 		commandList.addCommand(new AddAlbum());
 		commandList.addCommand(new AddMovie());

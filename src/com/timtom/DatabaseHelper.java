@@ -21,6 +21,7 @@ public class DatabaseHelper
 	private static String productTable = "product";
 	private static String customerTable = "customer";
 	private static String trackTable = "track";
+	private static String publisherTable = "publisher";
 
 	// Artist COLUMNS
 	private static String firstNameCol = "firstname";
@@ -30,6 +31,8 @@ public class DatabaseHelper
 	private static String trackNameCol = "name";
 	private static String trackDurationCol = "duration";
 	private static String trackGenreCol = "genre";
+
+	private static String publisherNameCol = "name";
 
 	private DatabaseHelper() throws SQLException
 	{
@@ -98,6 +101,37 @@ public class DatabaseHelper
 				}
 		}
 		return -1;
+	}
+
+	public void insertPublisher(String name)
+	{
+		PreparedStatement statement = null;
+
+		try
+		{
+			String insertArticle = "INSERT INTO " + publisherTable + " (" + publisherNameCol + ")" + " VALUES (?)";
+
+			statement = conn.prepareStatement(insertArticle);
+
+			statement.setString(1, name);
+
+			statement.executeUpdate();
+
+		} catch (SQLException e)
+		{
+			System.err.println("[ERROR] fout in de DB");
+			e.printStackTrace();
+		} finally
+		{
+			if (statement != null)
+				try
+				{
+					statement.close();
+				} catch (SQLException e)
+				{
+					e.printStackTrace();
+				}
+		}
 	}
 
 	public int insertCustomer(String firstname, String lastName, String mailAdress)
