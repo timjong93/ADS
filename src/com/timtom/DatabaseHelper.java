@@ -75,16 +75,16 @@ public class DatabaseHelper
 			statement.setString(1, firstname);
 			statement.setString(2, lastName);
 
-            ResultSet rs = statement.executeQuery();
-            int id = 0;
-            if (rs.next())
-            {
-                id = rs.getInt(1);
-            }
+			ResultSet rs = statement.executeQuery();
+			int id = 0;
+			if (rs.next())
+			{
+				id = rs.getInt(1);
+			}
 
-            rs.close();
-            statement.close();
-            return id;
+			rs.close();
+			statement.close();
+			return id;
 		} catch (SQLException e)
 		{
 			System.err.println("[ERROR] fout in de DB");
@@ -372,6 +372,49 @@ public class DatabaseHelper
 
 			statement.setInt(1, customerId);
 			statement.setInt(2, movieId);
+			statement.setDate(3, returnDate);
+
+			ResultSet rs = statement.executeQuery();
+
+			int id = -1;
+
+			while (rs.next())
+			{
+				id = rs.getInt(1);
+			}
+
+			rs.close();
+			return id;
+		} catch (SQLException e)
+		{
+			System.err.println("[ERROR] fout in de DB");
+			e.printStackTrace();
+		} finally
+		{
+			if (statement != null)
+				try
+				{
+					statement.close();
+				} catch (SQLException e)
+				{
+					e.printStackTrace();
+				}
+		}
+		return -1;
+	}
+
+	public int rentAlbum(int albumId, int customerId, Date returnDate)
+	{
+		CallableStatement statement = null;
+
+		try
+		{
+			String procedure = "{call rent_album(?,?,?)}";
+
+			statement = conn.prepareCall(procedure);
+
+			statement.setInt(1, customerId);
+			statement.setInt(2, albumId);
 			statement.setDate(3, returnDate);
 
 			ResultSet rs = statement.executeQuery();
