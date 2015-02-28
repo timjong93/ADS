@@ -13,7 +13,7 @@ public class FindAlbumByTrack extends Command
 
     public FindAlbumByTrack()
     {
-        super("Fin album by track name");
+        super("Find album by track name");
     }
 
     @Override

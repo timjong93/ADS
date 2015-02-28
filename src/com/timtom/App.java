@@ -2,18 +2,8 @@ package com.timtom;
 
 import java.util.Scanner;
 
-import com.timtom.commands.AddAlbum;
-import com.timtom.commands.AddArtist;
-import com.timtom.commands.AddCD;
-import com.timtom.commands.AddCustomer;
-import com.timtom.commands.AddDVD;
-import com.timtom.commands.AddMovie;
-import com.timtom.commands.AddPublisher;
-import com.timtom.commands.CommandList;
-import com.timtom.commands.ExitCommand;
-import com.timtom.commands.FindAlbumByTrack;
-import com.timtom.commands.RentAlbum;
-import com.timtom.commands.RentMovie;
+import com.timtom.commands.*;
+
 
 /**
  * Created by Tim on 12-2-2015.
@@ -38,6 +28,7 @@ public class App
 		commandList.addCommand(new RentMovie());
 		commandList.addCommand(new RentAlbum());
 		commandList.addCommand(new FindAlbumByTrack());
+        commandList.addCommand(new FindAlbumByTrack());
 
 		// Must be last
 		commandList.addCommand(new ExitCommand());
