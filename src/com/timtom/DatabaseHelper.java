@@ -62,6 +62,46 @@ public class DatabaseHelper
 		return dbHelper;
 	}
 
+    public ArrayList<String> findAlbumByTrack(String trackName)
+    {
+        PreparedStatement statement = null;
+
+        try
+        {
+            String query = "SELECT album.name FROM track INNER JOIN album_tracks ON track.id=album_tracks.id_track INNER JOIN album on album_tracks.id_album = album.id WHERE track.name = ?";
+
+            statement = conn.prepareStatement(query);
+
+            statement.setString(1, trackName);
+
+            ResultSet rs = statement.executeQuery();
+            ArrayList<String> result = new ArrayList<String>();
+            if (rs.next())
+            {
+                result.add(rs.getString(1));
+            }
+
+            rs.close();
+            statement.close();
+            return result;
+        } catch (SQLException e)
+        {
+            System.err.println("[ERROR] fout in de DB");
+            e.printStackTrace();
+        } finally
+        {
+            if (statement != null)
+                try
+                {
+                    statement.close();
+                } catch (SQLException e)
+                {
+                    e.printStackTrace();
+                }
+        }
+        return null;
+    }
+
 	public int insertArtist(String firstname, String lastName)
 	{
 		PreparedStatement statement = null;
