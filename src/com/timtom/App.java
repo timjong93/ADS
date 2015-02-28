@@ -10,6 +10,7 @@ import com.timtom.commands.AddMovie;
 import com.timtom.commands.AddPublisher;
 import com.timtom.commands.CommandList;
 import com.timtom.commands.ExitCommand;
+import com.timtom.commands.RentMovie;
 
 /**
  * Created by Tim on 12-2-2015.
@@ -30,6 +31,7 @@ public class App
 		commandList.addCommand(new AddAlbum());
 		commandList.addCommand(new AddMovie());
 		commandList.addCommand(new AddDVD());
+		commandList.addCommand(new RentMovie());
 
 		// Must be last
 		commandList.addCommand(new ExitCommand());
