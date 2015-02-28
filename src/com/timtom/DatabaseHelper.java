@@ -177,19 +177,21 @@ public class DatabaseHelper
 		return -1;
 	}
 
-	public int insertTrack(String name, int duration, String genre)
+	public int insertTrack(String name, int duration, String genre, ArrayList<Integer> artistids)
 	{
 		PreparedStatement statement = null;
 
 		try
 		{
-			String insertArticle = "INSERT INTO " + trackTable + " (" + trackNameCol + ", " + trackDurationCol + ", " + trackGenreCol + ")" + " VALUES (?,?,?) RETURNING id";
+            String procedure = "{call add_track(?,?,?,?)}";
 
-			statement = conn.prepareStatement(insertArticle);
+            statement = conn.prepareCall(procedure);
 
 			statement.setString(1, name);
-			statement.setInt(2, duration);
-			statement.setString(3, genre);
+			statement.setString(2, genre);
+			statement.setInt(3, duration);
+            Array array = conn.createArrayOf("integer", artistids.toArray());
+            statement.setArray(4, array);
 
 			ResultSet rs = statement.executeQuery();
 			int id = 0;
