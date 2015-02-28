@@ -102,6 +102,47 @@ public class DatabaseHelper
         return null;
     }
 
+    public ArrayList<String> findMovieByArtist(String firstName, String lastName)
+    {
+        PreparedStatement statement = null;
+
+        try
+        {
+            String query = "SELECT movie.name FROM artist INNER JOIN movie_artists ON artist.id=movie_artists.id_artist INNER JOIN movie on movie_artists.id_movie = movie.id where artist.firstname = ? AND artist.lastname = ?";
+
+            statement = conn.prepareStatement(query);
+
+            statement.setString(1, firstName);
+            statement.setString(2, lastName);
+
+            ResultSet rs = statement.executeQuery();
+            ArrayList<String> result = new ArrayList<String>();
+            if (rs.next())
+            {
+                result.add(rs.getString(1));
+            }
+
+            rs.close();
+            statement.close();
+            return result;
+        } catch (SQLException e)
+        {
+            System.err.println("[ERROR] fout in de DB");
+            e.printStackTrace();
+        } finally
+        {
+            if (statement != null)
+                try
+                {
+                    statement.close();
+                } catch (SQLException e)
+                {
+                    e.printStackTrace();
+                }
+        }
+        return null;
+    }
+
 	public int insertArtist(String firstname, String lastName)
 	{
 		PreparedStatement statement = null;

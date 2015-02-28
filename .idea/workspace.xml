@@ -2,8 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="65c37953-fd96-4276-bdcf-a619bbdaed94" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/com/timtom/commands/FindMovieByArtist.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/timtom/App.java" afterPath="$PROJECT_DIR$/src/com/timtom/App.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/timtom/commands/FindAlbumByTrack.java" afterPath="$PROJECT_DIR$/src/com/timtom/commands/FindAlbumByTrack.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/timtom/DatabaseHelper.java" afterPath="$PROJECT_DIR$/src/com/timtom/DatabaseHelper.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="ADS.iws" />
@@ -46,7 +47,7 @@
         <entry file="file://$PROJECT_DIR$/src/com/timtom/App.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0" vertical-offset="459" max-vertical-offset="1054">
-              <caret line="27" column="48" selection-start-line="27" selection-start-column="48" selection-end-line="27" selection-end-column="48" />
+              <caret line="31" column="0" selection-start-line="31" selection-start-column="0" selection-end-line="31" selection-end-column="0" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -57,21 +58,35 @@
       <file leaf-file-name="DatabaseHelper.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/com/timtom/DatabaseHelper.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.3074141" vertical-offset="221" max-vertical-offset="8398">
-              <caret line="23" column="55" selection-start-line="23" selection-start-column="55" selection-end-line="23" selection-end-column="55" />
+            <state vertical-scroll-proportion="1.1761006" vertical-offset="1683" max-vertical-offset="9095">
+              <caret line="110" column="224" selection-start-line="110" selection-start-column="224" selection-end-line="110" selection-end-column="224" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#2058#2066#0" expanded="true" />
-                <marker date="1425130955821" expanded="true" signature="1686:1693" placeholder="SELECT missi..." />
-                <marker date="1425130955821" expanded="true" signature="1686:1699" placeholder="SELECT track..." />
-                <marker date="1425130955821" expanded="true" signature="1686:1825" placeholder="SELECT track..track..." />
-                <marker date="1425130955821" expanded="true" signature="1686:1845" placeholder="INSERT INTO ..." />
-                <marker date="1425130955821" expanded="true" signature="1686:1846" placeholder="SELECT track..track..." />
-                <marker date="1425130955821" expanded="true" signature="2811:2931" placeholder="INSERT INTO ..." />
-                <marker date="1425130955821" expanded="true" signature="2821:2928" placeholder="INSERT INTO ..." />
-                <marker date="1425130955821" expanded="true" signature="2958:3035" placeholder="INSERT INTO ..." />
-                <marker date="1425130955821" expanded="true" signature="3616:3693" placeholder="INSERT INTO ..." />
-                <marker date="1425130955821" expanded="true" signature="4234:4354" placeholder="INSERT INTO ..." />
+                <element signature="e#3319#3327#0" expanded="true" />
+                <marker date="1425131962996" expanded="true" signature="1686:1693" placeholder="SELECT missi..." />
+                <marker date="1425131962996" expanded="true" signature="1686:1699" placeholder="SELECT track..." />
+                <marker date="1425131962996" expanded="true" signature="1686:1825" placeholder="SELECT track..track..." />
+                <marker date="1425131962996" expanded="true" signature="1686:1845" placeholder="INSERT INTO ..." />
+                <marker date="1425131962996" expanded="true" signature="1686:1846" placeholder="SELECT track..track..." />
+                <marker date="1425131962996" expanded="true" signature="2865:3061" placeholder="SELECT movie..artist..." />
+                <marker date="1425131962996" expanded="true" signature="4072:4192" placeholder="INSERT INTO ..." />
+                <marker date="1425131962996" expanded="true" signature="4082:4189" placeholder="INSERT INTO ..." />
+                <marker date="1425131962996" expanded="true" signature="4219:4296" placeholder="INSERT INTO ..." />
+                <marker date="1425131962996" expanded="true" signature="4877:4954" placeholder="INSERT INTO ..." />
+                <marker date="1425131962996" expanded="true" signature="5495:5615" placeholder="INSERT INTO ..." />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="FindMovieByArtist.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/timtom/commands/FindMovieByArtist.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="346" max-vertical-offset="646">
+              <caret line="28" column="33" selection-start-line="28" selection-start-column="33" selection-end-line="28" selection-end-column="33" />
+              <folding>
+                <element signature="imports" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -80,12 +95,10 @@
       <file leaf-file-name="FindAlbumByTrack.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/timtom/commands/FindAlbumByTrack.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="74" max-vertical-offset="680">
-              <caret line="10" column="21" selection-start-line="10" selection-start-column="21" selection-end-line="10" selection-end-column="21" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="63" max-vertical-offset="629">
+              <caret line="32" column="1" selection-start-line="10" selection-start-column="0" selection-end-line="32" selection-end-column="1" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#243#244#0" expanded="true" />
-                <element signature="e#292#293#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -150,6 +163,7 @@
         <option value="$PROJECT_DIR$/src/com/timtom/commands/AddTrack.java" />
         <option value="$PROJECT_DIR$/src/com/timtom/commands/FindAlbumByTrack.java" />
         <option value="$PROJECT_DIR$/src/com/timtom/App.java" />
+        <option value="$PROJECT_DIR$/src/com/timtom/commands/FindMovieByArtist.java" />
         <option value="$PROJECT_DIR$/src/com/timtom/DatabaseHelper.java" />
       </list>
     </option>
@@ -555,7 +569,7 @@
       <workItem from="1424345230481" duration="3199000" />
       <workItem from="1424866391585" duration="1207000" />
       <workItem from="1425122066167" duration="6151000" />
-      <workItem from="1425131051469" duration="4000" />
+      <workItem from="1425131051469" duration="924000" />
     </task>
     <task id="LOCAL-00001" summary="add customer">
       <created>1424349704281</created>
@@ -587,11 +601,17 @@
       <option name="project" value="LOCAL" />
       <updated>1425130524330</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="merge">
+      <created>1425131060818</created>
+      <option name="number" value="00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1425131060818</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="15723000" />
+    <option name="totallyTimeSpent" value="16643000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="1" y="1" width="1364" height="726" extended-state="0" />
@@ -600,6 +620,7 @@
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32996634" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="IDEtalk" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3297546" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -607,23 +628,22 @@
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.22053872" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.6632997" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Remote Host" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.25" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.25" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="IDEtalk Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32996634" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.18350169" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
     <layout-to-restore>
@@ -679,7 +699,8 @@
     <MESSAGE value="chenged track adding to function to fill track_artist table" />
     <MESSAGE value="added search album by trackname" />
     <MESSAGE value="conflict fix" />
-    <option name="LAST_COMMIT_MESSAGE" value="conflict fix" />
+    <MESSAGE value="merge" />
+    <option name="LAST_COMMIT_MESSAGE" value="merge" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -717,16 +738,18 @@
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#2058#2066#0" expanded="true" />
-            <marker date="1425130955821" expanded="true" signature="1686:1693" placeholder="SELECT missi..." />
-            <marker date="1425130955821" expanded="true" signature="1686:1699" placeholder="SELECT track..." />
-            <marker date="1425130955821" expanded="true" signature="1686:1825" placeholder="SELECT track..track..." />
-            <marker date="1425130955821" expanded="true" signature="1686:1845" placeholder="INSERT INTO ..." />
-            <marker date="1425130955821" expanded="true" signature="1686:1846" placeholder="SELECT track..track..." />
-            <marker date="1425130955821" expanded="true" signature="2811:2931" placeholder="INSERT INTO ..." />
-            <marker date="1425130955821" expanded="true" signature="2821:2928" placeholder="INSERT INTO ..." />
-            <marker date="1425130955821" expanded="true" signature="2958:3035" placeholder="INSERT INTO ..." />
-            <marker date="1425130955821" expanded="true" signature="3616:3693" placeholder="INSERT INTO ..." />
-            <marker date="1425130955821" expanded="true" signature="4234:4354" placeholder="INSERT INTO ..." />
+            <element signature="e#3319#3327#0" expanded="true" />
+            <marker date="1425131962996" expanded="true" signature="1686:1693" placeholder="SELECT missi..." />
+            <marker date="1425131962996" expanded="true" signature="1686:1699" placeholder="SELECT track..." />
+            <marker date="1425131962996" expanded="true" signature="1686:1825" placeholder="SELECT track..track..." />
+            <marker date="1425131962996" expanded="true" signature="1686:1845" placeholder="INSERT INTO ..." />
+            <marker date="1425131962996" expanded="true" signature="1686:1846" placeholder="SELECT track..track..." />
+            <marker date="1425131962996" expanded="true" signature="2865:3061" placeholder="SELECT movie..artist..." />
+            <marker date="1425131962996" expanded="true" signature="4072:4192" placeholder="INSERT INTO ..." />
+            <marker date="1425131962996" expanded="true" signature="4082:4189" placeholder="INSERT INTO ..." />
+            <marker date="1425131962996" expanded="true" signature="4219:4296" placeholder="INSERT INTO ..." />
+            <marker date="1425131962996" expanded="true" signature="4877:4954" placeholder="INSERT INTO ..." />
+            <marker date="1425131962996" expanded="true" signature="5495:5615" placeholder="INSERT INTO ..." />
           </folding>
         </state>
       </provider>
@@ -737,8 +760,6 @@
           <caret line="10" column="21" selection-start-line="10" selection-start-column="21" selection-end-line="10" selection-end-column="21" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#243#244#0" expanded="true" />
-            <element signature="e#292#293#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -802,16 +823,18 @@
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#2058#2066#0" expanded="true" />
-            <marker date="1425130955821" expanded="true" signature="1686:1693" placeholder="SELECT missi..." />
-            <marker date="1425130955821" expanded="true" signature="1686:1699" placeholder="SELECT track..." />
-            <marker date="1425130955821" expanded="true" signature="1686:1825" placeholder="SELECT track..track..." />
-            <marker date="1425130955821" expanded="true" signature="1686:1845" placeholder="INSERT INTO ..." />
-            <marker date="1425130955821" expanded="true" signature="1686:1846" placeholder="SELECT track..track..." />
-            <marker date="1425130955821" expanded="true" signature="2811:2931" placeholder="INSERT INTO ..." />
-            <marker date="1425130955821" expanded="true" signature="2821:2928" placeholder="INSERT INTO ..." />
-            <marker date="1425130955821" expanded="true" signature="2958:3035" placeholder="INSERT INTO ..." />
-            <marker date="1425130955821" expanded="true" signature="3616:3693" placeholder="INSERT INTO ..." />
-            <marker date="1425130955821" expanded="true" signature="4234:4354" placeholder="INSERT INTO ..." />
+            <element signature="e#3319#3327#0" expanded="true" />
+            <marker date="1425131962996" expanded="true" signature="1686:1693" placeholder="SELECT missi..." />
+            <marker date="1425131962996" expanded="true" signature="1686:1699" placeholder="SELECT track..." />
+            <marker date="1425131962996" expanded="true" signature="1686:1825" placeholder="SELECT track..track..." />
+            <marker date="1425131962996" expanded="true" signature="1686:1845" placeholder="INSERT INTO ..." />
+            <marker date="1425131962996" expanded="true" signature="1686:1846" placeholder="SELECT track..track..." />
+            <marker date="1425131962996" expanded="true" signature="2865:3061" placeholder="SELECT movie..artist..." />
+            <marker date="1425131962996" expanded="true" signature="4072:4192" placeholder="INSERT INTO ..." />
+            <marker date="1425131962996" expanded="true" signature="4082:4189" placeholder="INSERT INTO ..." />
+            <marker date="1425131962996" expanded="true" signature="4219:4296" placeholder="INSERT INTO ..." />
+            <marker date="1425131962996" expanded="true" signature="4877:4954" placeholder="INSERT INTO ..." />
+            <marker date="1425131962996" expanded="true" signature="5495:5615" placeholder="INSERT INTO ..." />
           </folding>
         </state>
       </provider>
@@ -859,16 +882,18 @@
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#2058#2066#0" expanded="true" />
-            <marker date="1425130955821" expanded="true" signature="1686:1693" placeholder="SELECT missi..." />
-            <marker date="1425130955821" expanded="true" signature="1686:1699" placeholder="SELECT track..." />
-            <marker date="1425130955821" expanded="true" signature="1686:1825" placeholder="SELECT track..track..." />
-            <marker date="1425130955821" expanded="true" signature="1686:1845" placeholder="INSERT INTO ..." />
-            <marker date="1425130955821" expanded="true" signature="1686:1846" placeholder="SELECT track..track..." />
-            <marker date="1425130955821" expanded="true" signature="2811:2931" placeholder="INSERT INTO ..." />
-            <marker date="1425130955821" expanded="true" signature="2821:2928" placeholder="INSERT INTO ..." />
-            <marker date="1425130955821" expanded="true" signature="2958:3035" placeholder="INSERT INTO ..." />
-            <marker date="1425130955821" expanded="true" signature="3616:3693" placeholder="INSERT INTO ..." />
-            <marker date="1425130955821" expanded="true" signature="4234:4354" placeholder="INSERT INTO ..." />
+            <element signature="e#3319#3327#0" expanded="true" />
+            <marker date="1425131962996" expanded="true" signature="1686:1693" placeholder="SELECT missi..." />
+            <marker date="1425131962996" expanded="true" signature="1686:1699" placeholder="SELECT track..." />
+            <marker date="1425131962996" expanded="true" signature="1686:1825" placeholder="SELECT track..track..." />
+            <marker date="1425131962996" expanded="true" signature="1686:1845" placeholder="INSERT INTO ..." />
+            <marker date="1425131962996" expanded="true" signature="1686:1846" placeholder="SELECT track..track..." />
+            <marker date="1425131962996" expanded="true" signature="2865:3061" placeholder="SELECT movie..artist..." />
+            <marker date="1425131962996" expanded="true" signature="4072:4192" placeholder="INSERT INTO ..." />
+            <marker date="1425131962996" expanded="true" signature="4082:4189" placeholder="INSERT INTO ..." />
+            <marker date="1425131962996" expanded="true" signature="4219:4296" placeholder="INSERT INTO ..." />
+            <marker date="1425131962996" expanded="true" signature="4877:4954" placeholder="INSERT INTO ..." />
+            <marker date="1425131962996" expanded="true" signature="5495:5615" placeholder="INSERT INTO ..." />
           </folding>
         </state>
       </provider>
@@ -893,6 +918,10 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="153" max-vertical-offset="272">
           <caret line="9" column="1" selection-start-line="9" selection-start-column="1" selection-end-line="9" selection-end-column="1" />
+          <folding>
+            <element signature="e#85#86#0" expanded="true" />
+            <element signature="e#117#118#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -913,16 +942,18 @@
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#2058#2066#0" expanded="true" />
-            <marker date="1425130955821" expanded="true" signature="1686:1693" placeholder="SELECT missi..." />
-            <marker date="1425130955821" expanded="true" signature="1686:1699" placeholder="SELECT track..." />
-            <marker date="1425130955821" expanded="true" signature="1686:1825" placeholder="SELECT track..track..." />
-            <marker date="1425130955821" expanded="true" signature="1686:1845" placeholder="INSERT INTO ..." />
-            <marker date="1425130955821" expanded="true" signature="1686:1846" placeholder="SELECT track..track..." />
-            <marker date="1425130955821" expanded="true" signature="2811:2931" placeholder="INSERT INTO ..." />
-            <marker date="1425130955821" expanded="true" signature="2821:2928" placeholder="INSERT INTO ..." />
-            <marker date="1425130955821" expanded="true" signature="2958:3035" placeholder="INSERT INTO ..." />
-            <marker date="1425130955821" expanded="true" signature="3616:3693" placeholder="INSERT INTO ..." />
-            <marker date="1425130955821" expanded="true" signature="4234:4354" placeholder="INSERT INTO ..." />
+            <element signature="e#3319#3327#0" expanded="true" />
+            <marker date="1425131962996" expanded="true" signature="1686:1693" placeholder="SELECT missi..." />
+            <marker date="1425131962996" expanded="true" signature="1686:1699" placeholder="SELECT track..." />
+            <marker date="1425131962996" expanded="true" signature="1686:1825" placeholder="SELECT track..track..." />
+            <marker date="1425131962996" expanded="true" signature="1686:1845" placeholder="INSERT INTO ..." />
+            <marker date="1425131962996" expanded="true" signature="1686:1846" placeholder="SELECT track..track..." />
+            <marker date="1425131962996" expanded="true" signature="2865:3061" placeholder="SELECT movie..artist..." />
+            <marker date="1425131962996" expanded="true" signature="4072:4192" placeholder="INSERT INTO ..." />
+            <marker date="1425131962996" expanded="true" signature="4082:4189" placeholder="INSERT INTO ..." />
+            <marker date="1425131962996" expanded="true" signature="4219:4296" placeholder="INSERT INTO ..." />
+            <marker date="1425131962996" expanded="true" signature="4877:4954" placeholder="INSERT INTO ..." />
+            <marker date="1425131962996" expanded="true" signature="5495:5615" placeholder="INSERT INTO ..." />
           </folding>
         </state>
       </provider>
@@ -947,6 +978,10 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="153" max-vertical-offset="272">
           <caret line="9" column="1" selection-start-line="9" selection-start-column="1" selection-end-line="9" selection-end-column="1" />
+          <folding>
+            <element signature="e#85#86#0" expanded="true" />
+            <element signature="e#117#118#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -967,16 +1002,18 @@
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#2058#2066#0" expanded="true" />
-            <marker date="1425130955821" expanded="true" signature="1686:1693" placeholder="SELECT missi..." />
-            <marker date="1425130955821" expanded="true" signature="1686:1699" placeholder="SELECT track..." />
-            <marker date="1425130955821" expanded="true" signature="1686:1825" placeholder="SELECT track..track..." />
-            <marker date="1425130955821" expanded="true" signature="1686:1845" placeholder="INSERT INTO ..." />
-            <marker date="1425130955821" expanded="true" signature="1686:1846" placeholder="SELECT track..track..." />
-            <marker date="1425130955821" expanded="true" signature="2811:2931" placeholder="INSERT INTO ..." />
-            <marker date="1425130955821" expanded="true" signature="2821:2928" placeholder="INSERT INTO ..." />
-            <marker date="1425130955821" expanded="true" signature="2958:3035" placeholder="INSERT INTO ..." />
-            <marker date="1425130955821" expanded="true" signature="3616:3693" placeholder="INSERT INTO ..." />
-            <marker date="1425130955821" expanded="true" signature="4234:4354" placeholder="INSERT INTO ..." />
+            <element signature="e#3319#3327#0" expanded="true" />
+            <marker date="1425131962996" expanded="true" signature="1686:1693" placeholder="SELECT missi..." />
+            <marker date="1425131962996" expanded="true" signature="1686:1699" placeholder="SELECT track..." />
+            <marker date="1425131962996" expanded="true" signature="1686:1825" placeholder="SELECT track..track..." />
+            <marker date="1425131962996" expanded="true" signature="1686:1845" placeholder="INSERT INTO ..." />
+            <marker date="1425131962996" expanded="true" signature="1686:1846" placeholder="SELECT track..track..." />
+            <marker date="1425131962996" expanded="true" signature="2865:3061" placeholder="SELECT movie..artist..." />
+            <marker date="1425131962996" expanded="true" signature="4072:4192" placeholder="INSERT INTO ..." />
+            <marker date="1425131962996" expanded="true" signature="4082:4189" placeholder="INSERT INTO ..." />
+            <marker date="1425131962996" expanded="true" signature="4219:4296" placeholder="INSERT INTO ..." />
+            <marker date="1425131962996" expanded="true" signature="4877:4954" placeholder="INSERT INTO ..." />
+            <marker date="1425131962996" expanded="true" signature="5495:5615" placeholder="INSERT INTO ..." />
           </folding>
         </state>
       </provider>
@@ -1001,6 +1038,10 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="272">
           <caret line="9" column="1" selection-start-line="9" selection-start-column="1" selection-end-line="9" selection-end-column="1" />
+          <folding>
+            <element signature="e#85#86#0" expanded="true" />
+            <element signature="e#117#118#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -1046,45 +1087,55 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/timtom/App.java">
+    <entry file="file://$PROJECT_DIR$/src/com/timtom/commands/FindAlbumByTrack.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="459" max-vertical-offset="1054">
-          <caret line="27" column="48" selection-start-line="27" selection-start-column="48" selection-end-line="27" selection-end-column="48" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="63" max-vertical-offset="629">
+          <caret line="32" column="1" selection-start-line="10" selection-start-column="0" selection-end-line="32" selection-end-column="1" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/timtom/commands/FindAlbumByTrack.java">
+    <entry file="file://$PROJECT_DIR$/src/com/timtom/App.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="74" max-vertical-offset="680">
-          <caret line="10" column="21" selection-start-line="10" selection-start-column="21" selection-end-line="10" selection-end-column="21" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="459" max-vertical-offset="1054">
+          <caret line="31" column="0" selection-start-line="31" selection-start-column="0" selection-end-line="31" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#243#244#0" expanded="true" />
-            <element signature="e#292#293#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/timtom/commands/FindMovieByArtist.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="346" max-vertical-offset="646">
+          <caret line="28" column="33" selection-start-line="28" selection-start-column="33" selection-end-line="28" selection-end-column="33" />
+          <folding>
+            <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/timtom/DatabaseHelper.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.3074141" vertical-offset="221" max-vertical-offset="8398">
-          <caret line="23" column="55" selection-start-line="23" selection-start-column="55" selection-end-line="23" selection-end-column="55" />
+        <state vertical-scroll-proportion="1.1761006" vertical-offset="1683" max-vertical-offset="9095">
+          <caret line="110" column="224" selection-start-line="110" selection-start-column="224" selection-end-line="110" selection-end-column="224" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#2058#2066#0" expanded="true" />
-            <marker date="1425130955821" expanded="true" signature="1686:1693" placeholder="SELECT missi..." />
-            <marker date="1425130955821" expanded="true" signature="1686:1699" placeholder="SELECT track..." />
-            <marker date="1425130955821" expanded="true" signature="1686:1825" placeholder="SELECT track..track..." />
-            <marker date="1425130955821" expanded="true" signature="1686:1845" placeholder="INSERT INTO ..." />
-            <marker date="1425130955821" expanded="true" signature="1686:1846" placeholder="SELECT track..track..." />
-            <marker date="1425130955821" expanded="true" signature="2811:2931" placeholder="INSERT INTO ..." />
-            <marker date="1425130955821" expanded="true" signature="2821:2928" placeholder="INSERT INTO ..." />
-            <marker date="1425130955821" expanded="true" signature="2958:3035" placeholder="INSERT INTO ..." />
-            <marker date="1425130955821" expanded="true" signature="3616:3693" placeholder="INSERT INTO ..." />
-            <marker date="1425130955821" expanded="true" signature="4234:4354" placeholder="INSERT INTO ..." />
+            <element signature="e#3319#3327#0" expanded="true" />
+            <marker date="1425131962996" expanded="true" signature="1686:1693" placeholder="SELECT missi..." />
+            <marker date="1425131962996" expanded="true" signature="1686:1699" placeholder="SELECT track..." />
+            <marker date="1425131962996" expanded="true" signature="1686:1825" placeholder="SELECT track..track..." />
+            <marker date="1425131962996" expanded="true" signature="1686:1845" placeholder="INSERT INTO ..." />
+            <marker date="1425131962996" expanded="true" signature="1686:1846" placeholder="SELECT track..track..." />
+            <marker date="1425131962996" expanded="true" signature="2865:3061" placeholder="SELECT movie..artist..." />
+            <marker date="1425131962996" expanded="true" signature="4072:4192" placeholder="INSERT INTO ..." />
+            <marker date="1425131962996" expanded="true" signature="4082:4189" placeholder="INSERT INTO ..." />
+            <marker date="1425131962996" expanded="true" signature="4219:4296" placeholder="INSERT INTO ..." />
+            <marker date="1425131962996" expanded="true" signature="4877:4954" placeholder="INSERT INTO ..." />
+            <marker date="1425131962996" expanded="true" signature="5495:5615" placeholder="INSERT INTO ..." />
           </folding>
         </state>
       </provider>

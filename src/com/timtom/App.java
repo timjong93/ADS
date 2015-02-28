@@ -28,7 +28,7 @@ public class App
 		commandList.addCommand(new RentMovie());
 		commandList.addCommand(new RentAlbum());
 		commandList.addCommand(new FindAlbumByTrack());
-        commandList.addCommand(new FindAlbumByTrack());
+        commandList.addCommand(new FindMovieByArtist());
 
 		// Must be last
 		commandList.addCommand(new ExitCommand());
