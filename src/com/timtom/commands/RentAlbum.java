@@ -8,20 +8,19 @@ import java.util.Scanner;
 
 import com.timtom.DatabaseHelper;
 
-public class RentMovie extends Command
+public class RentAlbum extends Command
 {
 
-	public RentMovie()
+	public RentAlbum()
 	{
-		super("Rent Movie");
-		// TODO Auto-generated constructor stub
+		super("Rent Album");
 	}
 
 	@Override
 	public Object execute(Scanner scanner)
 	{
-		System.out.println("movie id:");
-		int movieId = scanner.nextInt();
+		System.out.println("album id:");
+		int albumId = scanner.nextInt();
 		System.out.println("customer id:");
 		int customerId = scanner.nextInt();
 		System.out.println("Return date (dd-MM-yyyy):");
@@ -41,7 +40,7 @@ public class RentMovie extends Command
 
 		}
 
-		int id = DatabaseHelper.getDatabaseHelper().rentMovie(movieId, customerId, date);
+		int id = DatabaseHelper.getDatabaseHelper().rentAlbum(albumId, customerId, date);
 
 		if (id > 0)
 		{
@@ -53,5 +52,4 @@ public class RentMovie extends Command
 
 		return scanner;
 	}
-
 }
