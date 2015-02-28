@@ -11,6 +11,7 @@ import com.timtom.commands.AddMovie;
 import com.timtom.commands.AddPublisher;
 import com.timtom.commands.CommandList;
 import com.timtom.commands.ExitCommand;
+import com.timtom.commands.FindAlbumByTrack;
 import com.timtom.commands.RentAlbum;
 import com.timtom.commands.RentMovie;
 
@@ -36,6 +37,7 @@ public class App
 		commandList.addCommand(new AddCD());
 		commandList.addCommand(new RentMovie());
 		commandList.addCommand(new RentAlbum());
+		commandList.addCommand(new FindAlbumByTrack());
 
 		// Must be last
 		commandList.addCommand(new ExitCommand());
