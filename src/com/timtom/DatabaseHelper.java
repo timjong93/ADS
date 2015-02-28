@@ -359,4 +359,47 @@ public class DatabaseHelper
 				}
 		}
 	}
+
+	public int rentMovie(int movieId, int customerId, Date returnDate)
+	{
+		CallableStatement statement = null;
+
+		try
+		{
+			String procedure = "{call rent_movie(?,?,?)}";
+
+			statement = conn.prepareCall(procedure);
+
+			statement.setInt(1, customerId);
+			statement.setInt(2, movieId);
+			statement.setDate(3, returnDate);
+
+			ResultSet rs = statement.executeQuery();
+
+			int id = -1;
+
+			while (rs.next())
+			{
+				id = rs.getInt(1);
+			}
+
+			rs.close();
+			return id;
+		} catch (SQLException e)
+		{
+			System.err.println("[ERROR] fout in de DB");
+			e.printStackTrace();
+		} finally
+		{
+			if (statement != null)
+				try
+				{
+					statement.close();
+				} catch (SQLException e)
+				{
+					e.printStackTrace();
+				}
+		}
+		return -1;
+	}
 }
