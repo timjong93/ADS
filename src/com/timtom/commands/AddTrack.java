@@ -24,6 +24,7 @@ public class AddTrack extends Command
 		String genre = scanner.next();
 
 		int id = DatabaseHelper.getDatabaseHelper().insertTrack(name, duration, genre);
+        System.out.println("Created Track with id: " + id);
 		return id;
 	}
 }

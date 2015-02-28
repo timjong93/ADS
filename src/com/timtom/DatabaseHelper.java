@@ -65,24 +65,23 @@ public class DatabaseHelper
 
 		try
 		{
-			String insertArticle = "INSERT INTO " + artistTable + " (" + firstNameCol + ", " + lastNameCol + ")" + " VALUES (?,?)";
+			String insertArticle = "INSERT INTO " + artistTable + " (" + firstNameCol + ", " + lastNameCol + ")" + " VALUES (?,?) RETURNING id1";
 
 			statement = conn.prepareStatement(insertArticle);
 
 			statement.setString(1, firstname);
 			statement.setString(2, lastName);
 
-			int id = statement.executeUpdate();
-			ResultSet rs = statement.getGeneratedKeys();
+            ResultSet rs = statement.executeQuery();
+            int id = 0;
+            if (rs.next())
+            {
+                id = rs.getInt(1);
+            }
 
-			if (rs.next())
-			{
-				id = rs.getInt(1);
-			}
-
-			rs.close();
-			statement.close();
-			return id;
+            rs.close();
+            statement.close();
+            return id;
 		} catch (SQLException e)
 		{
 			System.err.println("[ERROR] fout in de DB");

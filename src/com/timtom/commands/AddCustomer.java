@@ -27,5 +27,6 @@ public class AddCustomer extends Command
 		int id = DatabaseHelper.getDatabaseHelper().insertCustomer(firstName, lastName, mailAdress);
 		System.out.println("Created Customer with id: " + id);
 		return id;
+
 	}
 }
