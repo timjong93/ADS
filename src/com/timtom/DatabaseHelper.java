@@ -20,11 +20,16 @@ public class DatabaseHelper
 	private static String artistTable = "artist";
 	private static String productTable = "product";
 	private static String customerTable = "customer";
+	private static String trackTable = "track";
 
 	// Artist COLUMNS
 	private static String firstNameCol = "firstname";
 	private static String lastNameCol = "lastname";
 	private static String mailAdressCol = "mailAdress";
+
+	private static String trackNameCol = "name";
+	private static String trackDurationCol = "duration";
+	private static String trackGenreCol = "genre";
 
 	private DatabaseHelper() throws SQLException
 	{
@@ -139,13 +144,55 @@ public class DatabaseHelper
 		return -1;
 	}
 
-	public int insertAlbum(int artistId, String publisher, String name, Date releaseDate)
+	public int insertTrack(String name, int duration, String genre)
+	{
+		PreparedStatement statement = null;
+
+		try
+		{
+			String insertArticle = "INSERT INTO " + trackTable + " (" + trackNameCol + ", " + trackDurationCol + ", " + trackGenreCol + ")" + " VALUES (?,?,?) RETURNING id";
+
+			statement = conn.prepareStatement(insertArticle);
+
+			statement.setString(1, name);
+			statement.setInt(2, duration);
+			statement.setString(3, genre);
+
+			ResultSet rs = statement.executeQuery();
+			int id = 0;
+			if (rs.next())
+			{
+				id = rs.getInt(1);
+			}
+
+			rs.close();
+			statement.close();
+			return id;
+		} catch (SQLException e)
+		{
+			System.err.println("[ERROR] fout in de DB");
+			e.printStackTrace();
+		} finally
+		{
+			if (statement != null)
+				try
+				{
+					statement.close();
+				} catch (SQLException e)
+				{
+					e.printStackTrace();
+				}
+		}
+		return -1;
+	}
+
+	public int insertAlbum(int artistId, String publisher, String name, Date releaseDate, ArrayList<Integer> tracks)
 	{
 		CallableStatement statement = null;
 
 		try
 		{
-			String procedure = "{call add_album(?,?,?,?)}";
+			String procedure = "{call add_album(?,?,?,?,?)}";
 
 			statement = conn.prepareCall(procedure);
 
@@ -153,6 +200,8 @@ public class DatabaseHelper
 			statement.setString(2, publisher);
 			statement.setString(3, name);
 			statement.setDate(4, releaseDate);
+			Array array = conn.createArrayOf("integer", tracks.toArray());
+			statement.setArray(5, array);
 
 			statement.execute();
 

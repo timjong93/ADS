@@ -4,6 +4,7 @@ import java.sql.Date;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 import com.timtom.DatabaseHelper;
@@ -11,10 +12,14 @@ import com.timtom.DatabaseHelper;
 public class AddAlbum extends Command
 {
 
+	private CommandList subMenuTrack = new CommandList();
+
 	public AddAlbum()
 	{
 		super("Add Album");
-		// TODO Auto-generated constructor stub
+		subMenuTrack.addCommand(new AddTrack());
+		subMenuTrack.addCommand(new FindTrack());
+		subMenuTrack.addCommand(new ExitCommand());
 	}
 
 	public Object execute(Scanner scanner)
@@ -43,7 +48,22 @@ public class AddAlbum extends Command
 
 		}
 
-		int id = DatabaseHelper.getDatabaseHelper().insertAlbum(artistId, publisher, name, date);
+		ArrayList<Integer> tracks = new ArrayList<Integer>();
+
+		while (true)
+		{
+			Object res = subMenuTrack.ExecuteCommand(scanner);
+
+			if (res instanceof Integer)
+			{
+				tracks.add((Integer) res);
+			} else
+			{
+				break;
+			}
+		}
+
+		int id = DatabaseHelper.getDatabaseHelper().insertAlbum(artistId, publisher, name, date, tracks);
 
 		System.out.println("Album generated with id: " + id);
 

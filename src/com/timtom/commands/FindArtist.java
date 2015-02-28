@@ -13,7 +13,7 @@ public class FindArtist extends Command
 	@Override
 	public Object execute(Scanner scanner)
 	{
-		System.out.println("artist id:");
+		System.out.println("Artist id:");
 		return scanner.nextInt();
 	}
 
