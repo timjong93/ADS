@@ -103,45 +103,85 @@ public class DatabaseHelper
 	}
 
 	public ArrayList<String> findMovieByArtist(String firstName, String lastName)
-	{
-		PreparedStatement statement = null;
+{
+    PreparedStatement statement = null;
 
-		try
-		{
-			String query = "SELECT movie.name FROM artist INNER JOIN movie_artists ON artist.id=movie_artists.id_artist INNER JOIN movie on movie_artists.id_movie = movie.id where artist.firstname = ? AND artist.lastname = ?";
+    try
+    {
+        String query = "SELECT movie.name FROM artist INNER JOIN movie_artists ON artist.id=movie_artists.id_artist INNER JOIN movie on movie_artists.id_movie = movie.id where artist.firstname = ? AND artist.lastname = ?";
 
-			statement = conn.prepareStatement(query);
+        statement = conn.prepareStatement(query);
 
-			statement.setString(1, firstName);
-			statement.setString(2, lastName);
+        statement.setString(1, firstName);
+        statement.setString(2, lastName);
 
-			ResultSet rs = statement.executeQuery();
-			ArrayList<String> result = new ArrayList<String>();
-			if (rs.next())
-			{
-				result.add(rs.getString(1));
-			}
+        ResultSet rs = statement.executeQuery();
+        ArrayList<String> result = new ArrayList<String>();
+        if (rs.next())
+        {
+            result.add(rs.getString(1));
+        }
 
-			rs.close();
-			statement.close();
-			return result;
-		} catch (SQLException e)
-		{
-			System.err.println("[ERROR] fout in de DB");
-			e.printStackTrace();
-		} finally
-		{
-			if (statement != null)
-				try
-				{
-					statement.close();
-				} catch (SQLException e)
-				{
-					e.printStackTrace();
-				}
-		}
-		return null;
-	}
+        rs.close();
+        statement.close();
+        return result;
+    } catch (SQLException e)
+    {
+        System.err.println("[ERROR] fout in de DB");
+        e.printStackTrace();
+    } finally
+    {
+        if (statement != null)
+            try
+            {
+                statement.close();
+            } catch (SQLException e)
+            {
+                e.printStackTrace();
+            }
+    }
+    return null;
+}
+
+    public ArrayList<String> findRentalHistoryByAlbum(String albumName)
+    {
+        PreparedStatement statement = null;
+
+        try
+        {
+            String query = "SELECT customer.firstname, customer.lastname, rental_history.return_date FROM rental_history  INNER JOIN product ON rental_history.id_product = product.id  INNER JOIN album ON id_album = album.id  INNER JOIN customer ON rental_history.id_customer = customer.id WHERE album.name = ?";
+
+            statement = conn.prepareStatement(query);
+
+            statement.setString(1, albumName);
+
+            ResultSet rs = statement.executeQuery();
+            ArrayList<String> result = new ArrayList<String>();
+            if (rs.next())
+            {
+                result.add("" + rs.getString(1) + "\t" + rs.getString(2) + "\t" + rs.getString(3) + "\t");
+            }
+
+            rs.close();
+            statement.close();
+            return result;
+        } catch (SQLException e)
+        {
+            System.err.println("[ERROR] fout in de DB");
+            e.printStackTrace();
+        } finally
+        {
+            if (statement != null)
+                try
+                {
+                    statement.close();
+                } catch (SQLException e)
+                {
+                    e.printStackTrace();
+                }
+        }
+        return null;
+    }
 
 	public int insertArtist(String firstname, String lastName)
 	{
@@ -403,11 +443,10 @@ public class DatabaseHelper
 	{
 		CallableStatement statement = null;
 
-		try
-		{
-			String procedure = "{call add_product(?,?,?)}";
+		try {
+            String procedure = "{call add_product(?,?,?)}";
 
-			statement = conn.prepareCall(procedure);
+            statement = conn.prepareCall(procedure);
 
 			if (movieId != -1)
 				statement.setInt(1, movieId);
@@ -416,8 +455,8 @@ public class DatabaseHelper
 
 			if (albumId != -1)
 				statement.setInt(2, albumId);
-			else
-				statement.setNull(2, Types.INTEGER);
+            else
+                statement.setNull(2, Types.INTEGER);
 
 			statement.setInt(3, amount);
 
@@ -445,8 +484,7 @@ public class DatabaseHelper
 	{
 		CallableStatement statement = null;
 
-		try
-		{
+        try {
 			String procedure = "{call rent_movie(?,?,?)}";
 
 			statement = conn.prepareCall(procedure);
@@ -484,11 +522,10 @@ public class DatabaseHelper
 		return -1;
 	}
 
-	public int rentAlbum(int albumId, int customerId, Date returnDate)
-	{
-		CallableStatement statement = null;
+	public int rentAlbum(int albumId, int customerId, Date returnDate) {
+        CallableStatement statement = null;
 
-		try
+        try
 		{
 			String procedure = "{call rent_album(?,?,?)}";
 
