@@ -20,6 +20,10 @@ public class PrintUtils
 
 			if (object.get(s) instanceof BasicDBList)
 			{
+				for (int i = 0; i < depth; i++)
+				{
+					System.out.print("\t");
+				}
 				System.out.println(String.format("%-16s:", s));
 				printDBObjects(((BasicDBList) object.get(s)), depth);
 			} else if (object.get(s) instanceof DBObject)
