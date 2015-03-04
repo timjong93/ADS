@@ -2,8 +2,7 @@
 <classpath>
 	<classpathentry kind="src" path="ADT1/src"/>
 	<classpathentry kind="src" path="src"/>
-	<classpathentry kind="lib" path="ADT1/postgresql-9.4-1200.jdbc4.jar"/>
-	<classpathentry kind="lib" path="mongo-java-driver-2.9.3.jar"/>
+	<classpathentry kind="lib" path="mongo-java-driver-2.13.0.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="output" path="ADT1/bin"/>
 </classpath>

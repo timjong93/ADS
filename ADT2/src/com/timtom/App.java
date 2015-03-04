@@ -4,6 +4,7 @@ import java.util.Scanner;
 
 import com.timtom.commands.CommandList;
 import com.timtom.commands.ExitCommand;
+import com.timtom.commands.FindRecipe;
 
 /**
  * Created by Tim on 12-2-2015.
@@ -18,6 +19,7 @@ public class App
 	{
 		scanner = new Scanner(System.in);
 		commandList = new CommandList();
+		commandList.addCommand(new FindRecipe());
 
 		// Must be last
 		commandList.addCommand(new ExitCommand());
