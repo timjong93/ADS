@@ -1,0 +1,96 @@
+//recipe collection
+
+{
+  "_id" : {
+    "type": ObjectId(),
+    "required": true
+  },
+  "Ingredients" : [
+    {"Ingredient":{
+    "type": String,
+    "required": true
+    },
+    "Amount":{
+      "type": int,
+      "required": true
+    }, 
+    "Unit":{
+      "type": String,
+      "required": true
+    }
+  }],
+  "Name": {
+    "type": int,
+    "required": true
+  },
+  "NrOfPersons": {
+    "type": int,
+    "required": true
+  },
+  "Course": {
+    "type": String,
+    "required": true
+  },
+  "Author": {
+    "type": int,
+    "required": true
+  }
+  "Difficulty": {
+    "type": int,
+    "required": true
+  },
+  "TimeToCook": {
+    "type": int,
+    "required": true
+  },
+  "Origin": {
+    "type": String,
+    "required": true
+  },
+  "Instructions": {
+    "type": String,
+    "required": true
+  },
+  "Ratings":[ 
+    {
+      "type": int,
+      "required": true
+    }
+  ],
+  "Comments":[
+    {
+      "Author":{
+        "type": int,
+        "required": true
+      }, 
+      "Comment":{
+        "type": String,
+        "required": true
+      }, 
+      "Likes":{
+      "type": int,
+      "required": true
+      }, 
+      "Dislikes":{
+        "type": int,
+        "required": true
+      }, 
+      "Comments":[
+      {
+        "type": comment,
+        "required": true
+      }]
+   }]
+}
+
+//users collection
+{
+  "_id":{
+    "type": ObjectId,
+    "required": true
+  },
+  "name":{
+    "type": String,
+    "required": true
+  },
+}
