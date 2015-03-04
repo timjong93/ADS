@@ -3,6 +3,7 @@ package com.timtom;
 import java.util.HashMap;
 import java.util.List;
 
+import com.mongodb.BasicDBList;
 import com.mongodb.BasicDBObject;
 import com.mongodb.DB;
 import com.mongodb.DBCollection;
@@ -25,6 +26,7 @@ public class DatabaseHelper
 		{
 			throw new Exception("Db does not exist");
 		}
+		collections.put("models", database.getCollection("models"));
 		collections.put("recipes", database.getCollection("recipes"));
 		collections.put("users", database.getCollection("users"));
 	}
@@ -46,9 +48,13 @@ public class DatabaseHelper
 		return dbHelper;
 	}
 
-	private void createDb()
+	public BasicDBList getFields(String objectName)
 	{
+		BasicDBObject querie = new BasicDBObject("name", objectName);
 
+		DBCursor cursor = collections.get("models").find(querie);
+
+		return (BasicDBList) cursor.next().get("fields");
 	}
 
 	public List<DBObject> getRecipes()
