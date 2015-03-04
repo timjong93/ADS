@@ -38,14 +38,28 @@ public class PrintUtils
 
 	public static void printDBObjects(BasicDBList objects, int depth)
 	{
-		for (Object o : objects)
+		for (Object object : objects)
 		{
 			for (int i = 0; i < depth; i++)
 			{
 				System.out.print("\t");
 			}
 			System.out.println("-----");
-			printDBObject((DBObject) o, depth);
+
+			if (object instanceof BasicDBList)
+			{
+				printDBObjects(((BasicDBList) object), depth);
+			} else if (object instanceof DBObject)
+			{
+				printDBObject((DBObject) object, depth + 1);
+			} else
+			{
+				for (int i = 0; i < depth; i++)
+				{
+					System.out.print("\t");
+				}
+				System.out.println(String.format("%-32s", object));
+			}
 		}
 	}
 
