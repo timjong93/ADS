@@ -2,9 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="65c37953-fd96-4276-bdcf-a619bbdaed94" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/com/timtom/commands/FindRentalHistoryByAlbum.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/timtom/App.java" afterPath="$PROJECT_DIR$/src/com/timtom/App.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/timtom/DatabaseHelper.java" afterPath="$PROJECT_DIR$/src/com/timtom/DatabaseHelper.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="ADS.iws" />
@@ -43,21 +40,31 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Main.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Main.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/timtom/Main.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.25105485" vertical-offset="0" max-vertical-offset="474">
+            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="238">
               <caret line="9" column="1" selection-start-line="9" selection-start-column="1" selection-end-line="9" selection-end-column="1" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="DatabaseHelper.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="ReturnProduct.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/timtom/commands/ReturnProduct.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="408">
+              <caret line="18" column="51" selection-start-line="18" selection-start-column="51" selection-end-line="18" selection-end-column="51" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="DatabaseHelper.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/com/timtom/DatabaseHelper.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="2451" max-vertical-offset="11016">
-              <caret line="155" column="44" selection-start-line="155" selection-start-column="44" selection-end-line="155" selection-end-column="44" />
+            <state vertical-scroll-proportion="0.30829015" vertical-offset="2448" max-vertical-offset="11016">
+              <caret line="151" column="309" selection-start-line="151" selection-start-column="28" selection-end-line="151" selection-end-column="309" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#1989#1997#0" expanded="true" />
@@ -140,16 +147,6 @@
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0" vertical-offset="68" max-vertical-offset="918">
               <caret line="10" column="4" selection-start-line="10" selection-start-column="4" selection-end-line="10" selection-end-column="50" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="AddArtist.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/timtom/commands/AddArtist.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="20" max-vertical-offset="561">
-              <caret line="27" column="8" selection-start-line="27" selection-start-column="8" selection-end-line="27" selection-end-column="60" />
               <folding />
             </state>
           </provider>
@@ -698,7 +695,7 @@
       <workItem from="1424345230481" duration="3199000" />
       <workItem from="1424866391585" duration="1207000" />
       <workItem from="1425122066167" duration="6151000" />
-      <workItem from="1425131051469" duration="2610000" />
+      <workItem from="1425131051469" duration="5493000" />
     </task>
     <task id="LOCAL-00001" summary="add customer">
       <created>1424349704281</created>
@@ -742,15 +739,21 @@
       <option name="project" value="LOCAL" />
       <updated>1425131987823</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="added hstory dearch on album name">
+      <created>1425216514089</created>
+      <option name="number" value="00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1425216514089</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="18329000" />
+    <option name="totallyTimeSpent" value="21212000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="1" y="1" width="1364" height="726" extended-state="0" />
-    <editor active="false" />
+    <frame x="1" y="1" width="1364" height="726" extended-state="1" />
+    <editor active="true" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -763,11 +766,11 @@
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.22053872" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.15488215" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.28114477" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Remote Host" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.25" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.25" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="IDEtalk Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -836,7 +839,8 @@
     <MESSAGE value="conflict fix" />
     <MESSAGE value="merge" />
     <MESSAGE value="find movie by artist" />
-    <option name="LAST_COMMIT_MESSAGE" value="find movie by artist" />
+    <MESSAGE value="added hstory dearch on album name" />
+    <option name="LAST_COMMIT_MESSAGE" value="added hstory dearch on album name" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -1217,28 +1221,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/timtom/DatabaseHelper.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="2451" max-vertical-offset="11016">
-          <caret line="155" column="44" selection-start-line="155" selection-start-column="44" selection-end-line="155" selection-end-column="44" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#1989#1997#0" expanded="true" />
-            <element signature="e#2985#2993#0" expanded="true" />
-            <element signature="e#4179#4187#0" expanded="true" />
-            <marker date="1425216189235" expanded="true" signature="1653:1813" placeholder="SELECT album..track..." />
-            <marker date="1425216189235" expanded="true" signature="2551:2747" placeholder="SELECT movie..artist..." />
-            <marker date="1425216189235" expanded="true" signature="3686:3967" placeholder="SELECT custo..rental_history..." />
-            <marker date="1425216189235" expanded="true" signature="4997:5104" placeholder="INSERT INTO ..." />
-            <marker date="1425216189235" expanded="true" signature="5004:5081" placeholder="INSERT INTO ..." />
-            <marker date="1425216189235" expanded="true" signature="5670:5790" placeholder="INSERT INTO ..." />
-            <marker date="1425216189235" expanded="true" signature="6382:6515" placeholder="INSERT INTO ..." />
-            <marker date="1425216189235" expanded="true" signature="12324:12398" placeholder="UPDATE missi..." />
-            <marker date="1425216189235" expanded="true" signature="13038:13108" placeholder="INSERT INTO ..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/timtom/commands/FindTrack.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="459">
@@ -1281,9 +1263,39 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/timtom/Main.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.25105485" vertical-offset="0" max-vertical-offset="474">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="238">
           <caret line="9" column="1" selection-start-line="9" selection-start-column="1" selection-end-line="9" selection-end-column="1" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/timtom/commands/ReturnProduct.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="408">
+          <caret line="18" column="51" selection-start-line="18" selection-start-column="51" selection-end-line="18" selection-end-column="51" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/timtom/DatabaseHelper.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.30829015" vertical-offset="2448" max-vertical-offset="11016">
+          <caret line="151" column="309" selection-start-line="151" selection-start-column="28" selection-end-line="151" selection-end-column="309" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#1989#1997#0" expanded="true" />
+            <element signature="e#2985#2993#0" expanded="true" />
+            <element signature="e#4179#4187#0" expanded="true" />
+            <marker date="1425216189235" expanded="true" signature="1653:1813" placeholder="SELECT album..track..." />
+            <marker date="1425216189235" expanded="true" signature="2551:2747" placeholder="SELECT movie..artist..." />
+            <marker date="1425216189235" expanded="true" signature="3686:3967" placeholder="SELECT custo..rental_history..." />
+            <marker date="1425216189235" expanded="true" signature="4997:5104" placeholder="INSERT INTO ..." />
+            <marker date="1425216189235" expanded="true" signature="5004:5081" placeholder="INSERT INTO ..." />
+            <marker date="1425216189235" expanded="true" signature="5670:5790" placeholder="INSERT INTO ..." />
+            <marker date="1425216189235" expanded="true" signature="6382:6515" placeholder="INSERT INTO ..." />
+            <marker date="1425216189235" expanded="true" signature="12324:12398" placeholder="UPDATE missi..." />
+            <marker date="1425216189235" expanded="true" signature="13038:13108" placeholder="INSERT INTO ..." />
+          </folding>
         </state>
       </provider>
     </entry>
