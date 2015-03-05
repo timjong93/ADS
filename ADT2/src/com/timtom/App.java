@@ -2,15 +2,14 @@ package com.timtom;
 
 import java.util.Scanner;
 
-<<<<<<< HEAD
 import com.timtom.commands.CommandList;
 import com.timtom.commands.ExitCommand;
-import com.timtom.commands.FindRecipe;
+import com.timtom.commands.FindRecipeByIngredientsAnd;
+import com.timtom.commands.FindRecipeByIngredientsOR;
 import com.timtom.commands.InsertRecipe;
 import com.timtom.commands.InsertUser;
-=======
-import com.timtom.commands.*;
->>>>>>> origin/master
+import com.timtom.commands.ShowAllRecipes;
+import com.timtom.commands.ShowTop5;
 
 /**
  * Created by Tim on 12-2-2015.
@@ -26,11 +25,11 @@ public class App
 		scanner = new Scanner(System.in);
 		commandList = new CommandList();
 		commandList.addCommand(new ShowAllRecipes());
-        commandList.addCommand(new FindRecipeByIngredientsOR());
-        commandList.addCommand(new FindRecipeByIngredientsAnd());
+		commandList.addCommand(new FindRecipeByIngredientsOR());
+		commandList.addCommand(new FindRecipeByIngredientsAnd());
 		commandList.addCommand(new InsertRecipe());
 		commandList.addCommand(new InsertUser());
-        commandList.addCommand(new ShowTop5());
+		commandList.addCommand(new ShowTop5());
 
 		// Must be last
 		commandList.addCommand(new ExitCommand());
