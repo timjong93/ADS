@@ -1,25 +1,25 @@
 package com.timtom.commands;
 
-import java.util.List;
-import java.util.Scanner;
-
 import com.mongodb.DBObject;
 import com.timtom.DatabaseHelper;
 import com.timtom.PrintUtils;
 
-public class FindRecipe extends Command
+import java.util.List;
+import java.util.Scanner;
+
+public class ShowTop5 extends Command
 {
 
-	public FindRecipe()
+	public ShowTop5()
 	{
-		super("Find Recipe");
+		super("Show Top 5");
 		// TODO Auto-generated constructor stub
 	}
 
 	@Override
 	public Object execute(Scanner scanner)
 	{
-		List<DBObject> items = DatabaseHelper.getDatabaseHelper().getRecipes();
+		List<DBObject> items = DatabaseHelper.getDatabaseHelper().getTop5Recipes();
 
 		PrintUtils.printDBObjects(items, 0);
 
