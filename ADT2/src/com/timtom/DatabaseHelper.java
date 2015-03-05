@@ -66,17 +66,6 @@ public class DatabaseHelper
 		return cursor.toArray();
 	}
 
-	private HashMap<String, Object> cursorToHashMap(BasicDBObject o)
-	{
-		HashMap<String, Object> result = new HashMap<String, Object>();
-		for (String s : o.keySet())
-		{
-
-		}
-
-		return o;
-	}
-
 	public void insertInto(String collection, DBObject object)
 	{
 		collections.get(collection).insert(object);

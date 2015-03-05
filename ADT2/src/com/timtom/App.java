@@ -6,6 +6,7 @@ import com.timtom.commands.CommandList;
 import com.timtom.commands.ExitCommand;
 import com.timtom.commands.FindRecipe;
 import com.timtom.commands.InsertRecipe;
+import com.timtom.commands.InsertUser;
 
 /**
  * Created by Tim on 12-2-2015.
@@ -22,6 +23,7 @@ public class App
 		commandList = new CommandList();
 		commandList.addCommand(new FindRecipe());
 		commandList.addCommand(new InsertRecipe());
+		commandList.addCommand(new InsertUser());
 
 		// Must be last
 		commandList.addCommand(new ExitCommand());
