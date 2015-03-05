@@ -1,96 +1,151 @@
-//recipe collection
-
+/* 0 */
 {
-  "_id" : {
-    "type": ObjectId(),
-    "required": true
-  },
-  "Ingredients" : [
-    {"Ingredient":{
-    "type": String,
-    "required": true
-    },
-    "Amount":{
-      "type": int,
-      "required": true
-    }, 
-    "Unit":{
-      "type": String,
-      "required": true
-    }
-  }],
-  "Name": {
-    "type": int,
-    "required": true
-  },
-  "NrOfPersons": {
-    "type": int,
-    "required": true
-  },
-  "Course": {
-    "type": String,
-    "required": true
-  },
-  "Author": {
-    "type": int,
-    "required": true
-  }
-  "Difficulty": {
-    "type": int,
-    "required": true
-  },
-  "TimeToCook": {
-    "type": int,
-    "required": true
-  },
-  "Origin": {
-    "type": String,
-    "required": true
-  },
-  "Instructions": {
-    "type": String,
-    "required": true
-  },
-  "Ratings":[ 
-    {
-      "type": int,
-      "required": true
-    }
-  ],
-  "Comments":[
-    {
-      "Author":{
-        "type": int,
-        "required": true
-      }, 
-      "Comment":{
-        "type": String,
-        "required": true
-      }, 
-      "Likes":{
-      "type": int,
-      "required": true
-      }, 
-      "Dislikes":{
-        "type": int,
-        "required": true
-      }, 
-      "Comments":[
-      {
-        "type": comment,
-        "required": true
-      }]
-   }]
+    "_id" : ObjectId("54f71be017ebaa484c74d278"),
+    "name" : "Recipe",
+    "fields" : [ 
+        {
+            "name" : "Ingredients",
+            "type" : "array",
+            "arrayType" : {
+                "name" : "Ingredient",
+                "type" : "Ingredient",
+                "required" : true
+            },
+            "required" : true
+        }, 
+        {
+            "name" : "Name",
+            "type" : "string",
+            "required" : true
+        }, 
+        {
+            "name" : "NrOfPersons",
+            "type" : "int",
+            "required" : true
+        }, 
+        {
+            "name" : "Course",
+            "type" : "string",
+            "required" : true
+        }, 
+        {
+            "name" : "Author",
+            "type" : "int",
+            "required" : true
+        }, 
+        {
+            "name" : "Difficulty",
+            "type" : "int",
+            "required" : true
+        }, 
+        {
+            "name" : "TimeToCook",
+            "type" : "int",
+            "required" : true
+        }, 
+        {
+            "name" : "Origin",
+            "type" : "string",
+            "required" : true
+        }, 
+        {
+            "name" : "Instructions",
+            "type" : "string",
+            "required" : true
+        }, 
+        {
+            "name" : "Ratings",
+            "type" : "array",
+            "arrayType" : {
+                "name" : "Rating",
+                "type" : "int",
+                "required" : true
+            },
+            "required" : true
+        }, 
+        {
+            "name" : "Comments",
+            "type" : "array",
+            "arrayType" : {
+                "name" : "Comment",
+                "type" : "Comment",
+                "required" : true
+            },
+            "required" : true
+        }
+    ]
 }
 
-//users collection
+/* 1 */
 {
-  "_id":{
-    "type": ObjectId,
-    "required": true
-  },
-  "name":{
-    "type": String,
-    "required": true
-  },
+    "_id" : ObjectId("54f71c7b17ebaa484c74d279"),
+    "name" : "Ingredient",
+    "fields" : [ 
+        {
+            "name" : "Ingredient",
+            "type" : "string",
+            "required" : true
+        }, 
+        {
+            "name" : "Amount",
+            "type" : "int",
+            "required" : true
+        }, 
+        {
+            "name" : "Unit",
+            "type" : "string",
+            "required" : true
+        }
+    ]
+}
+
+/* 2 */
+{
+    "_id" : ObjectId("54f71d7717ebaa484c74d27a"),
+    "name" : "Comment",
+    "fields" : [ 
+        {
+            "name" : "Author",
+            "type" : "int",
+            "required" : true
+        }, 
+        {
+            "name" : "Comment",
+            "type" : "string",
+            "required" : true
+        }, 
+        {
+            "name" : "Likes",
+            "type" : "int",
+            "required" : true
+        }, 
+        {
+            "name" : "Dislikes",
+            "type" : "int",
+            "required" : true
+        }, 
+        {
+            "name" : "Comments",
+            "type" : "array",
+            "arrayType" : {
+                "name" : "Comment",
+                "type" : "Comment",
+                "required" : false
+            },
+            "required" : true
+        }
+    ]
+}
+
+/* 3 */
+{
+    "_id" : ObjectId("54f71e4317ebaa484c74d27b"),
+    "name" : "User",
+    "fields" : [ 
+        {
+            "name" : "Name",
+            "type" : "string",
+            "required" : true
+        }
+    ]
 }

@@ -1,5 +1,7 @@
 package com.timtom;
 
+import java.util.Scanner;
+
 import com.mongodb.BasicDBList;
 import com.mongodb.BasicDBObject;
 import com.mongodb.DBObject;
@@ -12,39 +14,75 @@ public class AskUserUtil
 		// TODO Auto-generated constructor stub
 	}
 
-	public static DBObject AskUserFieldsInput(String objectName)
+	public static Object AskUserFieldsInput(Scanner scan, String objectName)
 	{
-		BasicDBObject result = new BasicDBObject();
-		BasicDBList fields = DatabaseHelper.getDatabaseHelper().getFields(objectName);
-
-		for (Object object : fields)
+		if (objectName.equals("string"))
 		{
-			BasicDBObject field = (BasicDBObject) object;
+			String value = scan.nextLine();
+			return value;
+		} else if (objectName.equals("int"))
+		{
+			int value = scan.nextInt();
+			scan.nextLine();
+			return value;
+		} else
+		{
+			BasicDBObject result = new BasicDBObject();
+			BasicDBList fields = DatabaseHelper.getDatabaseHelper().getFields(objectName);
 
-			if (field.get("type").toString().equals("array"))
+			for (Object object : fields)
 			{
-				result.append(field.getString("name"), AskUserFieldsInputArray(field.get("arrayType").toString()));
-			} else
+				BasicDBObject field = (BasicDBObject) object;
+
+				String fieldType = field.get("type").toString();
+
+				if (field.get("type").toString().equals("array"))
+				{
+					System.out.println("give a value for " + field.getString("name") + " (" + fieldType + ")");
+					result.append(field.getString("name"), AskUserFieldsInputArray(scan, (DBObject) field.get("arrayType")));
+				} else
+				{
+					System.out.println("give a value for " + field.getString("name") + " (" + fieldType + ")");
+					Object value = AskUserFieldsInput(scan, fieldType);
+					result.append(field.getString("name"), value);
+				}
+			}
+			return result;
+		}
+	}
+
+	public static BasicDBList AskUserFieldsInputArray(Scanner scan, DBObject field)
+	{
+		BasicDBList result = new BasicDBList();
+
+		if (field.get("type").toString().equals("array"))
+		{
+			while (true)
 			{
-				// ask
-				System.out.println("give a value for " + field.getString("name"));
+				System.out.println("Do you want to at another value?(y/n):");
+				if (scan.nextLine().toLowerCase().equals("y"))
+				{
+					result.add(AskUserFieldsInputArray(scan, (DBObject) field.get("arrayType")));
+				} else
+				{
+					break;
+				}
+			}
+		} else
+		{
+			while (true)
+			{
+				System.out.println("Do you want to at another value?(y/n):");
+				if (scan.nextLine().toLowerCase().equals("y"))
+				{
+					result.add(AskUserFieldsInput(scan, field.get("type").toString()));
+				} else
+				{
+					break;
+				}
 			}
 		}
 
 		return result;
 	}
-
-	public static BasicDBList AskUserFieldsInputArray(String objectnaam)
-	{
-		BasicDBList result = new BasicDBList();
-
-		while (true)
-		{
-
-			break;
-		}
-
-		return result;
-	}
-
 }

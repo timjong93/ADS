@@ -76,4 +76,9 @@ public class DatabaseHelper
 
 		return o;
 	}
+
+	public void insertInto(String collection, DBObject object)
+	{
+		collections.get(collection).insert(object);
+	}
 }

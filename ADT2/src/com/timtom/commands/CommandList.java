@@ -32,6 +32,7 @@ public class CommandList
 	{
 		printMenu();
 		int i = scanner.nextInt();
+		scanner.nextLine();
 		if (i - 1 < commands.size())
 		{
 			return commands.get(i - 1).execute(scanner);
