@@ -1,5 +1,6 @@
 package com.timtom;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 
@@ -57,7 +58,7 @@ public class DatabaseHelper
 		return (BasicDBList) cursor.next().get("fields");
 	}
 
-	public List<DBObject> getRecipes()
+	public List<DBObject> getAllRecipes()
 	{
 		BasicDBObject querie = new BasicDBObject();
 
@@ -65,6 +66,18 @@ public class DatabaseHelper
 
 		return cursor.toArray();
 	}
+
+    public List<DBObject> getRecipesByIngredients(String[] Ingredients)
+    {
+        BasicDBList ingredientDocs = new BasicDBList();
+        ingredientDocs.addAll(Arrays.asList(Ingredients));
+        DBObject inClause = new BasicDBObject("$in", ingredientDocs);
+        DBObject query = new BasicDBObject("Ingredients.Ingredient", inClause);
+        DBCursor cursor = collections.get("recipes").find(query);
+        System.out.println(query);
+
+        return cursor.toArray();
+    }
 
 	private HashMap<String, Object> cursorToHashMap(BasicDBObject o)
 	{
@@ -77,3 +90,6 @@ public class DatabaseHelper
 		return o;
 	}
 }
+
+
+//db.Recipes.aggregate([{$unwind:"$Ratings"},{$group:{_id:"$_id", avg_ratings:{$avg:"$Ratings"}, name:{$first:"$Name"}}}])

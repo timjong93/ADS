@@ -2,10 +2,7 @@ package com.timtom;
 
 import java.util.Scanner;
 
-import com.timtom.commands.CommandList;
-import com.timtom.commands.ExitCommand;
-import com.timtom.commands.FindRecipe;
-import com.timtom.commands.InsertRecipe;
+import com.timtom.commands.*;
 
 /**
  * Created by Tim on 12-2-2015.
@@ -20,7 +17,8 @@ public class App
 	{
 		scanner = new Scanner(System.in);
 		commandList = new CommandList();
-		commandList.addCommand(new FindRecipe());
+		commandList.addCommand(new ShowAllRecipes());
+        commandList.addCommand(new FindRecipeByIngredients());
 		commandList.addCommand(new InsertRecipe());
 
 		// Must be last
