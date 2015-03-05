@@ -18,8 +18,10 @@ public class App
 		scanner = new Scanner(System.in);
 		commandList = new CommandList();
 		commandList.addCommand(new ShowAllRecipes());
-        commandList.addCommand(new FindRecipeByIngredients());
+        commandList.addCommand(new FindRecipeByIngredientsOR());
+        commandList.addCommand(new FindRecipeByIngredientsAnd());
 		commandList.addCommand(new InsertRecipe());
+        commandList.addCommand(new ShowTop5());
 
 		// Must be last
 		commandList.addCommand(new ExitCommand());
