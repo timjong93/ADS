@@ -2,6 +2,8 @@ package com.timtom;
 
 import java.util.Scanner;
 
+import org.bson.types.ObjectId;
+
 import com.mongodb.BasicDBList;
 import com.mongodb.BasicDBObject;
 import com.mongodb.DBObject;
@@ -40,6 +42,9 @@ public class AskUserUtil
 				{
 					System.out.println("give a value for " + field.getString("name") + " (" + fieldType + ")");
 					result.append(field.getString("name"), AskUserFieldsInputArray(scan, (DBObject) field.get("arrayType")));
+				} else if (field.get("type").toString().equals("ObjectId"))
+				{
+					result.append(field.getString("name"), new ObjectId());
 				} else
 				{
 					System.out.println("give a value for " + field.getString("name") + " (" + fieldType + ")");

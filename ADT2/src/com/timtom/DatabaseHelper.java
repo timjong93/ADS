@@ -142,6 +142,38 @@ public class DatabaseHelper
 	{
 		collections.get(collection).insert(object);
 	}
+
+	public void insertIntoArray(String recipeName, String fieldName, Object object)
+	{
+		DBObject query = new BasicDBObject("Name", recipeName);
+		DBObject addTo = new BasicDBObject("$addToSet", new BasicDBObject(fieldName, object));
+
+		collections.get("recipes").update(query, addTo);
+	}
+
+	public void likeComment(String recipeName, ObjectId commentId)
+	{
+		DBObject query = new BasicDBObject("Name", recipeName).append("Comments._id", commentId);
+		DBObject addTo = new BasicDBObject("$inc", new BasicDBObject("Comments.$.Likes", 1));
+
+		collections.get("recipes").update(query, addTo);
+	}
+
+	public void dislikeComment(String recipeName, ObjectId commentId)
+	{
+		DBObject query = new BasicDBObject("Name", recipeName).append("Comments._id", commentId);
+		DBObject addTo = new BasicDBObject("$inc", new BasicDBObject("Comments.$.Dislikes", 1));
+
+		collections.get("recipes").update(query, addTo);
+	}
+
+	public void updateComment(String recipeName, ObjectId commentId, DBObject object)
+	{
+		DBObject query = new BasicDBObject("Name", recipeName).append("Comments", new BasicDBObject("_id", commentId));
+		DBObject addTo = new BasicDBObject("$set", new BasicDBObject("Comments.$", object));
+
+		collections.get("recipes").update(query, addTo);
+	}
 }
 
 // db.recipes.aggregate([{$unwind:"$Ratings"},{$group:{_id:"$_id",

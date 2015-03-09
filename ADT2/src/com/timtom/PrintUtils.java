@@ -44,7 +44,7 @@ public class PrintUtils
 	{
 		for (Object object : objects)
 		{
-			for (int i = 0; i < depth; i++)
+			for (int i = 0; i < depth + 1; i++)
 			{
 				System.out.print("\t");
 			}
@@ -58,7 +58,7 @@ public class PrintUtils
 				printDBObject((DBObject) object, depth + 1);
 			} else
 			{
-				for (int i = 0; i < depth; i++)
+				for (int i = 0; i < depth + 1; i++)
 				{
 					System.out.print("\t");
 				}
