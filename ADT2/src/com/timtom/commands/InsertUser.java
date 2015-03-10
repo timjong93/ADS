@@ -5,6 +5,7 @@ import java.util.Scanner;
 import com.mongodb.DBObject;
 import com.timtom.AskUserUtil;
 import com.timtom.DatabaseHelper;
+import com.timtom.exeception.NoModelFoundException;
 
 public class InsertUser extends Command
 {
@@ -17,7 +18,14 @@ public class InsertUser extends Command
 	@Override
 	public Object execute(Scanner scanner)
 	{
-		DatabaseHelper.getDatabaseHelper().insertInto("users", (DBObject) AskUserUtil.AskUserFieldsInput(scanner, "User"));
+		try
+		{
+			DatabaseHelper.getDatabaseHelper().insertInto("users", (DBObject) AskUserUtil.AskUserFieldsInput(scanner, "User"));
+		} catch (NoModelFoundException e)
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		return 0;
 	}
 }

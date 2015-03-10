@@ -59,7 +59,10 @@ public class DatabaseHelper
 
 		DBCursor cursor = collections.get("models").find(querie);
 
-		return (BasicDBList) cursor.next().get("fields");
+		if (cursor.hasNext())
+			return (BasicDBList) cursor.next().get("fields");
+		else
+			return null;
 	}
 
 	public List<DBObject> getAllRecipes()

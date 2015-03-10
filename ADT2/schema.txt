@@ -105,6 +105,11 @@
     "name" : "Comment",
     "fields" : [ 
         {
+            "name" : "_id",
+            "type" : "ObjectId",
+            "required" : true
+        }, 
+        {
             "name" : "Author",
             "type" : "int",
             "required" : true
@@ -125,13 +130,8 @@
             "required" : true
         }, 
         {
-            "name" : "Comments",
-            "type" : "array",
-            "arrayType" : {
-                "name" : "Comment",
-                "type" : "Comment",
-                "required" : false
-            },
+            "name" : "Path",
+            "type" : "string",
             "required" : true
         }
     ]
