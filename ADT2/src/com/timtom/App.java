@@ -20,6 +20,7 @@ public class App
 		commandList.addCommand(new ShowAllRecipes());
         commandList.addCommand(new FindRecipeByIngredientsOR());
         commandList.addCommand(new FindRecipeByIngredientsAnd());
+        commandList.addCommand(new FindRecipeByIngredientOrAndSort());
 		commandList.addCommand(new InsertRecipe());
         commandList.addCommand(new ShowTop5());
 

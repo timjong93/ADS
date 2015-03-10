@@ -94,6 +94,44 @@ public class DatabaseHelper
         return cursor.toArray();
     }
 
+    public List<DBObject> getRecipesByIngredientsORAndSort(ArrayList<String> Ingredients)
+    {
+        //create match
+        BasicDBList ingredientDocs = new BasicDBList();
+        ingredientDocs.addAll(Ingredients);
+        DBObject inClause = new BasicDBObject("$in", ingredientDocs);
+        DBObject query = new BasicDBObject("Ingredients.Ingredient", inClause);
+        BasicDBObject match = new BasicDBObject("$match", query);
+
+        // create our pipeline operations, first with the $unwind
+        DBObject unwind = new BasicDBObject("$unwind","$Ratings");
+
+        // build the $group operation
+        DBObject groupFields = new BasicDBObject("_id", "$_id");
+        DBObject average = new BasicDBObject("$avg", "$Ratings");
+        groupFields.put("avg_ratings", average);
+        DBObject group = new BasicDBObject("$group", groupFields );
+
+        //build the $sort operation
+        DBObject sortFields = new BasicDBObject("avg_ratings",-1);
+        DBObject sort = new BasicDBObject("$sort",sortFields);
+
+
+
+        List<DBObject> pipeline = Arrays.asList(unwind, match ,group, sort);
+        AggregationOutput output = collections.get("recipes").aggregate(pipeline);
+
+        ArrayList<DBObject> result = new ArrayList<DBObject>();
+
+        for(DBObject topCandidate : output.results()){
+
+            result.addAll(FindRecipeById(topCandidate.get("_id").toString()));
+        }
+
+
+        return result;
+    }
+
     public List<DBObject> getTop5Recipes(){
         //db.recipes.aggregate([{$unwind:"$Ratings"},{$group:{_id:"$_id", avg_ratings:{$avg:"$Ratings"}}},{$sort:{"avg_ratings":-1}},{$limit:5}])
 
