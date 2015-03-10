@@ -105,7 +105,6 @@ public class DatabaseHelper
 		return cursor.toArray();
 	}
 
-<<<<<<< HEAD
     public List<DBObject> getRecipesByIngredientsORAndSort(ArrayList<String> Ingredients)
     {
         //create match
@@ -146,12 +145,6 @@ public class DatabaseHelper
 
     public List<DBObject> getTop5Recipes(){
         //db.recipes.aggregate([{$unwind:"$Ratings"},{$group:{_id:"$_id", avg_ratings:{$avg:"$Ratings"}}},{$sort:{"avg_ratings":-1}},{$limit:5}])
-=======
-	public List<DBObject> getTop5Recipes()
-	{
-		// db.recipes.aggregate([{$unwind:"$Ratings"},{$group:{_id:"$_id",
-		// avg_ratings:{$avg:"$Ratings"}}},{$sort:{"avg_ratings":-1}},{$limit:5}])
->>>>>>> 1262a220cf6a6ba800e5a237bc9266541811585f
 
 		// create our pipeline operations, first with the $unwind
 		DBObject unwind = new BasicDBObject("$unwind", "$Ratings");
