@@ -22,7 +22,12 @@ public class App
         commandList.addCommand(new FindRecipeByIngredientsAnd());
         commandList.addCommand(new FindRecipeByIngredientOrAndSort());
 		commandList.addCommand(new InsertRecipe());
-        commandList.addCommand(new ShowTop5());
+		commandList.addCommand(new InsertUser());
+		commandList.addCommand(new AddComment());
+		commandList.addCommand(new LikeComment());
+		commandList.addCommand(new DislikeComment());
+		commandList.addCommand(new RateRecipe());
+		commandList.addCommand(new ShowTop5());
 
 		// Must be last
 		commandList.addCommand(new ExitCommand());

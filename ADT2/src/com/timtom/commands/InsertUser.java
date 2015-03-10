@@ -7,12 +7,12 @@ import com.timtom.AskUserUtil;
 import com.timtom.DatabaseHelper;
 import com.timtom.exeception.NoModelFoundException;
 
-public class InsertRecipe extends Command
+public class InsertUser extends Command
 {
 
-	public InsertRecipe()
+	public InsertUser()
 	{
-		super("Insert a recipe");
+		super("Insert a user");
 	}
 
 	@Override
@@ -20,7 +20,7 @@ public class InsertRecipe extends Command
 	{
 		try
 		{
-			DatabaseHelper.getDatabaseHelper().insertInto("recipes", (DBObject) AskUserUtil.AskUserFieldsInput(scanner, "Recipe"));
+			DatabaseHelper.getDatabaseHelper().insertInto("users", (DBObject) AskUserUtil.AskUserFieldsInput(scanner, "User"));
 		} catch (NoModelFoundException e)
 		{
 			// TODO Auto-generated catch block

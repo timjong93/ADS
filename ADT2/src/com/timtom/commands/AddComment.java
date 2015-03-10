@@ -7,23 +7,25 @@ import com.timtom.AskUserUtil;
 import com.timtom.DatabaseHelper;
 import com.timtom.exeception.NoModelFoundException;
 
-public class InsertRecipe extends Command
+public class AddComment extends Command
 {
 
-	public InsertRecipe()
+	public AddComment()
 	{
-		super("Insert a recipe");
+		super("Add Comment");
 	}
 
 	@Override
 	public Object execute(Scanner scanner)
 	{
+		System.out.println("Please give name of Recipe:");
+		String name = scanner.nextLine();
+
 		try
 		{
-			DatabaseHelper.getDatabaseHelper().insertInto("recipes", (DBObject) AskUserUtil.AskUserFieldsInput(scanner, "Recipe"));
+			DatabaseHelper.getDatabaseHelper().insertIntoArray(name, "Comments", (DBObject) AskUserUtil.AskUserFieldsInput(scanner, "Comment"));
 		} catch (NoModelFoundException e)
 		{
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return 0;

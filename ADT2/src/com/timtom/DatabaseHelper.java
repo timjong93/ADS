@@ -5,8 +5,16 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 
-import com.mongodb.*;
 import org.bson.types.ObjectId;
+
+import com.mongodb.AggregationOutput;
+import com.mongodb.BasicDBList;
+import com.mongodb.BasicDBObject;
+import com.mongodb.DB;
+import com.mongodb.DBCollection;
+import com.mongodb.DBCursor;
+import com.mongodb.DBObject;
+import com.mongodb.MongoClient;
 
 public class DatabaseHelper
 {
@@ -51,7 +59,10 @@ public class DatabaseHelper
 
 		DBCursor cursor = collections.get("models").find(querie);
 
-		return (BasicDBList) cursor.next().get("fields");
+		if (cursor.hasNext())
+			return (BasicDBList) cursor.next().get("fields");
+		else
+			return null;
 	}
 
 	public List<DBObject> getAllRecipes()
@@ -63,37 +74,38 @@ public class DatabaseHelper
 		return cursor.toArray();
 	}
 
-    public List<DBObject> FindRecipeById(String id)
-    {
-        BasicDBObject query = new BasicDBObject("_id",new ObjectId(id));
+	public List<DBObject> FindRecipeById(String id)
+	{
+		BasicDBObject query = new BasicDBObject("_id", new ObjectId(id));
 
-        DBCursor cursor = collections.get("recipes").find(query);
+		DBCursor cursor = collections.get("recipes").find(query);
 
-        return cursor.toArray();
-    }
+		return cursor.toArray();
+	}
 
-    public List<DBObject> getRecipesByIngredientsOR(ArrayList<String> Ingredients)
-    {
-        BasicDBList ingredientDocs = new BasicDBList();
-        ingredientDocs.addAll(Ingredients);
-        DBObject inClause = new BasicDBObject("$in", ingredientDocs);
-        DBObject query = new BasicDBObject("Ingredients.Ingredient", inClause);
-        DBCursor cursor = collections.get("recipes").find(query);
-        System.out.println(query);
+	public List<DBObject> getRecipesByIngredientsOR(ArrayList<String> Ingredients)
+	{
+		BasicDBList ingredientDocs = new BasicDBList();
+		ingredientDocs.addAll(Ingredients);
+		DBObject inClause = new BasicDBObject("$in", ingredientDocs);
+		DBObject query = new BasicDBObject("Ingredients.Ingredient", inClause);
+		DBCursor cursor = collections.get("recipes").find(query);
+		System.out.println(query);
 
-        return cursor.toArray();
-    }
+		return cursor.toArray();
+	}
 
-    public List<DBObject> getRecipesByIngredientsAND(ArrayList<String> Ingredients)
-    {
-        BasicDBList ingredientDocs = new BasicDBList();
-        ingredientDocs.addAll(Ingredients);
-        DBObject inClause = new BasicDBObject("$all", ingredientDocs);
-        DBObject query = new BasicDBObject("Ingredients.Ingredient", inClause);
-        DBCursor cursor = collections.get("recipes").find(query);
-        return cursor.toArray();
-    }
+	public List<DBObject> getRecipesByIngredientsAND(ArrayList<String> Ingredients)
+	{
+		BasicDBList ingredientDocs = new BasicDBList();
+		ingredientDocs.addAll(Ingredients);
+		DBObject inClause = new BasicDBObject("$all", ingredientDocs);
+		DBObject query = new BasicDBObject("Ingredients.Ingredient", inClause);
+		DBCursor cursor = collections.get("recipes").find(query);
+		return cursor.toArray();
+	}
 
+<<<<<<< HEAD
     public List<DBObject> getRecipesByIngredientsORAndSort(ArrayList<String> Ingredients)
     {
         //create match
@@ -134,54 +146,81 @@ public class DatabaseHelper
 
     public List<DBObject> getTop5Recipes(){
         //db.recipes.aggregate([{$unwind:"$Ratings"},{$group:{_id:"$_id", avg_ratings:{$avg:"$Ratings"}}},{$sort:{"avg_ratings":-1}},{$limit:5}])
-
-        // create our pipeline operations, first with the $unwind
-        DBObject unwind = new BasicDBObject("$unwind","$Ratings");
-
-        // build the $group operation
-        DBObject groupFields = new BasicDBObject("_id", "$_id");
-        DBObject average = new BasicDBObject("$avg", "$Ratings");
-        groupFields.put("avg_ratings", average);
-        DBObject group = new BasicDBObject("$group", groupFields );
-
-        //build the $sort operation
-        DBObject sortFields = new BasicDBObject("avg_ratings",-1);
-        DBObject sort = new BasicDBObject("$sort",sortFields);
-
-        //build the $limit operation
-        DBObject limit = new BasicDBObject("$limit",5);
-
-        List<DBObject> pipeline = Arrays.asList(unwind, group, sort, limit);
-        AggregationOutput output = collections.get("recipes").aggregate(pipeline);
-
-        ArrayList<DBObject> result = new ArrayList<DBObject>();
-
-        for(DBObject topCandidate : output.results()){
-
-           result.addAll(FindRecipeById(topCandidate.get("_id").toString()));
-        }
-
-
-        return result;
-
-    }
-
-	private HashMap<String, Object> cursorToHashMap(BasicDBObject o)
+=======
+	public List<DBObject> getTop5Recipes()
 	{
-		HashMap<String, Object> result = new HashMap<String, Object>();
-		for (String s : o.keySet())
+		// db.recipes.aggregate([{$unwind:"$Ratings"},{$group:{_id:"$_id",
+		// avg_ratings:{$avg:"$Ratings"}}},{$sort:{"avg_ratings":-1}},{$limit:5}])
+>>>>>>> 1262a220cf6a6ba800e5a237bc9266541811585f
+
+		// create our pipeline operations, first with the $unwind
+		DBObject unwind = new BasicDBObject("$unwind", "$Ratings");
+
+		// build the $group operation
+		DBObject groupFields = new BasicDBObject("_id", "$_id");
+		DBObject average = new BasicDBObject("$avg", "$Ratings");
+		groupFields.put("avg_ratings", average);
+		DBObject group = new BasicDBObject("$group", groupFields);
+
+		// build the $sort operation
+		DBObject sortFields = new BasicDBObject("avg_ratings", -1);
+		DBObject sort = new BasicDBObject("$sort", sortFields);
+
+		// build the $limit operation
+		DBObject limit = new BasicDBObject("$limit", 5);
+
+		List<DBObject> pipeline = Arrays.asList(unwind, group, sort, limit);
+		AggregationOutput output = collections.get("recipes").aggregate(pipeline);
+
+		ArrayList<DBObject> result = new ArrayList<DBObject>();
+
+		for (DBObject topCandidate : output.results())
 		{
 
+			result.addAll(FindRecipeById(topCandidate.get("_id").toString()));
 		}
 
-		return o;
+		return result;
+
 	}
 
 	public void insertInto(String collection, DBObject object)
 	{
 		collections.get(collection).insert(object);
 	}
+
+	public void insertIntoArray(String recipeName, String fieldName, Object object)
+	{
+		DBObject query = new BasicDBObject("Name", recipeName);
+		DBObject addTo = new BasicDBObject("$addToSet", new BasicDBObject(fieldName, object));
+
+		collections.get("recipes").update(query, addTo);
+	}
+
+	public void likeComment(String recipeName, ObjectId commentId)
+	{
+		DBObject query = new BasicDBObject("Name", recipeName).append("Comments._id", commentId);
+		DBObject addTo = new BasicDBObject("$inc", new BasicDBObject("Comments.$.Likes", 1));
+
+		collections.get("recipes").update(query, addTo);
+	}
+
+	public void dislikeComment(String recipeName, ObjectId commentId)
+	{
+		DBObject query = new BasicDBObject("Name", recipeName).append("Comments._id", commentId);
+		DBObject addTo = new BasicDBObject("$inc", new BasicDBObject("Comments.$.Dislikes", 1));
+
+		collections.get("recipes").update(query, addTo);
+	}
+
+	public void updateComment(String recipeName, ObjectId commentId, DBObject object)
+	{
+		DBObject query = new BasicDBObject("Name", recipeName).append("Comments", new BasicDBObject("_id", commentId));
+		DBObject addTo = new BasicDBObject("$set", new BasicDBObject("Comments.$", object));
+
+		collections.get("recipes").update(query, addTo);
+	}
 }
 
-
-//db.recipes.aggregate([{$unwind:"$Ratings"},{$group:{_id:"$_id", avg_ratings:{$avg:"$Ratings"}}},{$sort:{"avg_ratings":-1}},{$limit:5}])
+// db.recipes.aggregate([{$unwind:"$Ratings"},{$group:{_id:"$_id",
+// avg_ratings:{$avg:"$Ratings"}}},{$sort:{"avg_ratings":-1}},{$limit:5}])

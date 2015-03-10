@@ -39,7 +39,7 @@
       <file leaf-file-name="App.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/com/timtom/App.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.44337812" vertical-offset="109" max-vertical-offset="918">
+            <state vertical-scroll-proportion="-0.2725528" vertical-offset="482" max-vertical-offset="1003">
               <caret line="22" column="68" selection-start-line="22" selection-start-column="68" selection-end-line="22" selection-end-column="68" />
               <folding />
             </state>
@@ -49,8 +49,8 @@
       <file leaf-file-name="InsertRecipe.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/timtom/commands/InsertRecipe.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="68" max-vertical-offset="374">
-              <caret line="8" column="13" selection-start-line="8" selection-start-column="13" selection-end-line="8" selection-end-column="13" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="85" max-vertical-offset="561">
+              <caret line="9" column="13" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
               <folding />
             </state>
           </provider>
@@ -91,11 +91,11 @@
       <file leaf-file-name="DatabaseHelper.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/timtom/DatabaseHelper.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="1584" max-vertical-offset="3111">
-              <caret line="114" column="35" selection-start-line="114" selection-start-column="35" selection-end-line="114" selection-end-column="35" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="1805" max-vertical-offset="3859">
+              <caret line="126" column="35" selection-start-line="126" selection-start-column="35" selection-end-line="126" selection-end-column="35" />
               <folding>
-                <element signature="e#3871#3881#0" expanded="true" />
-                <element signature="e#5147#5157#0" expanded="true" />
+                <marker date="1425994931099" expanded="true" signature="5541:5551" placeholder="&lt;~&gt;" />
+                <marker date="1425994931099" expanded="false" signature="6087:6103" placeholder="&lt;~&gt;" />
               </folding>
             </state>
           </provider>
@@ -131,8 +131,8 @@
         <option value="$PROJECT_DIR$/src/com/timtom/commands/FindRecipeByIngredientsAnd.java" />
         <option value="$PROJECT_DIR$/src/com/timtom/commands/ShowTop5.java" />
         <option value="$PROJECT_DIR$/src/com/timtom/commands/FindRecipeByIngredientOrAndSort.java" />
-        <option value="$PROJECT_DIR$/src/com/timtom/App.java" />
         <option value="$PROJECT_DIR$/src/com/timtom/DatabaseHelper.java" />
+        <option value="$PROJECT_DIR$/src/com/timtom/App.java" />
       </list>
     </option>
   </component>
@@ -558,15 +558,15 @@
       <option name="number" value="Default" />
       <updated>1425543578672</updated>
       <workItem from="1425543582157" duration="8102000" />
-      <workItem from="1425989724804" duration="2199000" />
+      <workItem from="1425989724804" duration="2365000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="10301000" />
+    <option name="totallyTimeSpent" value="10467000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="1" y="1" width="1364" height="726" extended-state="0" />
+    <frame x="1" y="1" width="1364" height="726" extended-state="1" />
     <editor active="true" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="13" side_tool="false" content_ui="tabs" />
@@ -679,8 +679,8 @@
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2516">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="e#3871#3881#0" expanded="true" />
-            <element signature="e#5147#5157#0" expanded="true" />
+            <marker date="1425994931099" expanded="true" signature="5541:5551" placeholder="&lt;~&gt;" />
+            <marker date="1425994931099" expanded="false" signature="6087:6103" placeholder="&lt;~&gt;" />
           </folding>
         </state>
       </provider>
@@ -727,8 +727,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/timtom/commands/InsertRecipe.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="374">
-          <caret line="8" column="13" selection-start-line="8" selection-start-column="13" selection-end-line="8" selection-end-column="13" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="85" max-vertical-offset="561">
+          <caret line="9" column="13" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
           <folding />
         </state>
       </provider>
@@ -769,18 +769,18 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/timtom/DatabaseHelper.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="1584" max-vertical-offset="3111">
-          <caret line="114" column="35" selection-start-line="114" selection-start-column="35" selection-end-line="114" selection-end-column="35" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="1805" max-vertical-offset="3859">
+          <caret line="126" column="35" selection-start-line="126" selection-start-column="35" selection-end-line="126" selection-end-column="35" />
           <folding>
-            <element signature="e#3871#3881#0" expanded="true" />
-            <element signature="e#5147#5157#0" expanded="true" />
+            <marker date="1425994931099" expanded="true" signature="5541:5551" placeholder="&lt;~&gt;" />
+            <marker date="1425994931099" expanded="false" signature="6087:6103" placeholder="&lt;~&gt;" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/timtom/App.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.44337812" vertical-offset="109" max-vertical-offset="918">
+        <state vertical-scroll-proportion="-0.2725528" vertical-offset="482" max-vertical-offset="1003">
           <caret line="22" column="68" selection-start-line="22" selection-start-column="68" selection-end-line="22" selection-end-column="68" />
           <folding />
         </state>

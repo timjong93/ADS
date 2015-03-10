@@ -2,9 +2,12 @@ package com.timtom;
 
 import java.util.Scanner;
 
+import org.bson.types.ObjectId;
+
 import com.mongodb.BasicDBList;
 import com.mongodb.BasicDBObject;
 import com.mongodb.DBObject;
+import com.timtom.exeception.NoModelFoundException;
 
 public class AskUserUtil
 {
@@ -14,7 +17,7 @@ public class AskUserUtil
 		// TODO Auto-generated constructor stub
 	}
 
-	public static Object AskUserFieldsInput(Scanner scan, String objectName)
+	public static Object AskUserFieldsInput(Scanner scan, String objectName) throws NoModelFoundException
 	{
 		if (objectName.equals("string"))
 		{
@@ -22,13 +25,28 @@ public class AskUserUtil
 			return value;
 		} else if (objectName.equals("int"))
 		{
-			int value = scan.nextInt();
-			scan.nextLine();
+			Integer value = null;
+			while (value == null)
+			{
+				try
+				{
+					value = scan.nextInt();
+					scan.nextLine();
+				} catch (IllegalStateException e)
+				{
+					System.err.println("Geef een integer!");
+				}
+			}
 			return value;
 		} else
 		{
 			BasicDBObject result = new BasicDBObject();
 			BasicDBList fields = DatabaseHelper.getDatabaseHelper().getFields(objectName);
+
+			if (fields == null)
+			{
+				throw new NoModelFoundException("Object \"" + objectName + "\" not found in collection \"models\"");
+			}
 
 			for (Object object : fields)
 			{
@@ -40,6 +58,9 @@ public class AskUserUtil
 				{
 					System.out.println("give a value for " + field.getString("name") + " (" + fieldType + ")");
 					result.append(field.getString("name"), AskUserFieldsInputArray(scan, (DBObject) field.get("arrayType")));
+				} else if (field.get("type").toString().equals("ObjectId"))
+				{
+					result.append(field.getString("name"), new ObjectId());
 				} else
 				{
 					System.out.println("give a value for " + field.getString("name") + " (" + fieldType + ")");
@@ -51,7 +72,7 @@ public class AskUserUtil
 		}
 	}
 
-	public static BasicDBList AskUserFieldsInputArray(Scanner scan, DBObject field)
+	public static BasicDBList AskUserFieldsInputArray(Scanner scan, DBObject field) throws NoModelFoundException
 	{
 		BasicDBList result = new BasicDBList();
 
