@@ -1,5 +1,6 @@
 package com.timtom;
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 import org.bson.types.ObjectId;
@@ -32,8 +33,9 @@ public class AskUserUtil
 				{
 					value = scan.nextInt();
 					scan.nextLine();
-				} catch (IllegalStateException e)
+				} catch (InputMismatchException e)
 				{
+					scan.nextLine();
 					System.err.println("Geef een integer!");
 				}
 			}
