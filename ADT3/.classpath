@@ -60,7 +60,6 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="lib" path="/usr/lib/hadoop/client-0.20/mockito-all-1.8.5.jar"/>
-	<classpathentry kind="lib" path="/usr/lib/hadoop/client-0.20/oro-2.0.8.jar"/>
 	<classpathentry kind="lib" path="/usr/lib/hadoop/client-0.20/paranamer-2.3.jar"/>
 	<classpathentry kind="lib" path="/usr/lib/hadoop/client-0.20/protobuf-java-2.4.0a.jar"/>
 	<classpathentry kind="lib" path="/usr/lib/hadoop/client-0.20/servlet-api-2.5.jar"/>
