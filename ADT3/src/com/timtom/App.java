@@ -8,44 +8,40 @@ import com.timtom.database.DatabaseHelper;
 /**
  * Created by Tim on 12-2-2015.
  */
-public class App
-{
+public class App {
 
 	private Scanner scanner;
 	private CommandList commandList;
 
-	public App()
-	{
-		DatabaseHelper.getDatabaseHelper();
-		
+	public App() {
 		scanner = new Scanner(System.in);
 		commandList = new CommandList();
 
-		//commands
-		
+		// commands
+		commandList.addCommand(new InsertMail());
 
 		// Must be last
 		commandList.addCommand(new ExitCommand());
-		execute();
 
 	}
 
-	public void printWelcomeText()
-	{
+	public void printWelcomeText() {
 		System.out.println("Welcome to the Recepies System.");
 	}
 
-	public void execute()
-	{
-		printWelcomeText();
-		while (true)
-		{
-			Object result = commandList.ExecuteCommand(scanner);
+	public void execute() {
+		try {
+			printWelcomeText();
+			while (true) {
+				Object result = commandList.ExecuteCommand(scanner);
 
-			if (result instanceof String && ((String) result).equals("EXITLOOP"))
-			{
-				break;
+				if (result instanceof String
+						&& ((String) result).equals("EXITLOOP")) {
+					break;
+				}
 			}
+		} finally {
+			DatabaseHelper.getDatabaseHelper().closeConnection();
 		}
 	}
 }
