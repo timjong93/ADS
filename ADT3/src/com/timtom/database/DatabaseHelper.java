@@ -30,6 +30,7 @@ import org.apache.hadoop.hbase.filter.Filter;
 import org.apache.hadoop.hbase.filter.PrefixFilter;
 import org.apache.hadoop.hbase.util.Bytes;
 
+import com.google.common.primitives.Longs;
 import com.timtom.model.Mail;
 
 public class DatabaseHelper {
@@ -148,7 +149,7 @@ public class DatabaseHelper {
 			put.add(Bytes.toBytes(content), Bytes.toBytes("subject"), Bytes.toBytes(mail.subject));
 			put.add(Bytes.toBytes(content), Bytes.toBytes("body"), Bytes.toBytes(mail.mailBody));
 			
-			put.add(Bytes.toBytes(meta), Bytes.toBytes("send_time"), Bytes.toBytes(dateFormat.format(mail.sendTime)));
+			put.add(Bytes.toBytes(meta), Bytes.toBytes("send_time"), Longs.toByteArray(mail.sendTime.getTime()));
 			put.add(Bytes.toBytes(meta), Bytes.toBytes("read"), Bytes.toBytes(false));
 			
 			for(File f : mail.attachements)

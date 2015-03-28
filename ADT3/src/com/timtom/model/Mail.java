@@ -10,6 +10,7 @@ import java.util.Date;
 import org.apache.hadoop.hdfs.util.ByteArray;
 import org.hsqldb.Database;
 
+import com.google.common.primitives.Longs;
 import com.timtom.database.DatabaseHelper;
 
 public class Mail {
@@ -67,7 +68,7 @@ public class Mail {
 		md.update(reciever.getBytes());
 		recieverHashed = md.digest();
 		
-		timebytes = DatabaseHelper.getDatabaseHelper().dateFormat.format(sendTime).getBytes();
+		timebytes = Longs.toByteArray(sendTime.getTime());
 		
 		total = new byte[40 + timebytes.length];
 		System.arraycopy(recieverHashed, 0, total, 0, recieverHashed.length < 20 ? recieverHashed.length : 20);
