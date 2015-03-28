@@ -190,12 +190,14 @@ public class DatabaseHelper {
 		Scan scan = new Scan();
 		Filter prefixFilter = new PrefixFilter(prefix);
 	    scan.setFilter(prefixFilter);
+	    scan.addColumn(Bytes.toBytes("sender"), Bytes.toBytes("name"));
+	    scan.addColumn(Bytes.toBytes("meta"), Bytes.toBytes("send_time"));
 		scan.addColumn(Bytes.toBytes("content"), Bytes.toBytes("subject"));
 		scan.addColumn(Bytes.toBytes("content"), Bytes.toBytes("body"));
 		ResultScanner scanner = mailTable.getScanner(scan);
 		ArrayList<Mail> inbox = new ArrayList<Mail>();
 		for (Result result : scanner) {
-		    inbox.add(new Mail(null, null, null, null, null, null, new String(result.getValue(Bytes.toBytes("content"),Bytes.toBytes("subject"))), new String(result.getValue(Bytes.toBytes("content"),Bytes.toBytes("body"))), null, false));
+		    inbox.add(new Mail(new String(result.getValue(Bytes.toBytes("sender"),Bytes.toBytes("name"))), null, null, null, null, null, new String(result.getValue(Bytes.toBytes("content"),Bytes.toBytes("subject"))), new String(result.getValue(Bytes.toBytes("content"),Bytes.toBytes("body"))), null, false));
 		}
 		return inbox;
 	}
