@@ -21,6 +21,7 @@ public class App {
 		commandList.addCommand(new InsertMail());
 		commandList.addCommand(new Inbox());
 		commandList.addCommand(new DeleteMail());
+		commandList.addCommand(new ReplyMail());
 		
 		// Must be last
 		commandList.addCommand(new ExitCommand());

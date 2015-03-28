@@ -20,7 +20,7 @@ public class DeleteMail extends Command {
 		String owner = scanner.nextLine();
 		System.out.println("Mail van:");
 		String sender = scanner.nextLine();
-		System.out.println("Epoch tijd verzonden:");
+		System.out.println("tijd ontvangen in miliseconden sinds epoch:");
 		long tijd = scanner.nextLong();
 		scanner.nextLine();
 		

@@ -9,6 +9,8 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
+import java.util.Map.Entry;
+import java.util.NavigableMap;
 
 import javax.sound.midi.SysexMessage;
 
@@ -171,8 +173,21 @@ public class DatabaseHelper {
 			Get get = new Get(m.getKey(owner));
 			get.addFamily(content.getBytes());
 			get.addFamily(sender.getBytes());
-			Result r = mailTable.get(get);
+			get.addFamily(recipients.getBytes());
+			Result result = mailTable.get(get);
+			ArrayList<String> recievers = new ArrayList<String>();
+			for(Entry<byte[], byte[]> entry : result.getFamilyMap(recipients.getBytes()).entrySet())
+			{
+				if(new String(entry.getValue()).equals("REC"))
+				{
+					recievers.add(new String(entry.getKey()));
+				}
+			}
+			m.recievers = new String[recievers.size()];
+			recievers.toArray(m.recievers);
 			
+			m.subject = new String(result.getValue(Bytes.toBytes("content"),Bytes.toBytes("subject")));
+			m.mailBody = new String(result.getValue(Bytes.toBytes("content"),Bytes.toBytes("body")));
 		} catch (NoSuchAlgorithmException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
