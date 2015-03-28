@@ -20,6 +20,7 @@ public class App {
 		// commands
 		commandList.addCommand(new InsertMail());
 		commandList.addCommand(new Inbox());
+		commandList.addCommand(new DeleteMail());
 		
 		// Must be last
 		commandList.addCommand(new ExitCommand());
