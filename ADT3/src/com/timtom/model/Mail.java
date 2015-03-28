@@ -79,7 +79,7 @@ public class Mail {
 	}
 	
 	public String toString(){
-		return "Subject: \t"+this.subject+"\nmail: \t"+this.mailBody+ "\n--------------------------------------\n";
+		return "Sender: \t"+this.sender+"\nSend: \t"+this.sendTime+"\nSubject: \t"+this.subject+"\nmail: \t"+this.mailBody+ "\n--------------------------------------\n";
 		
 	}
 }

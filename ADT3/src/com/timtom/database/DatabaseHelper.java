@@ -8,6 +8,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 
 import javax.sound.midi.SysexMessage;
 
@@ -198,7 +199,7 @@ public class DatabaseHelper {
 		ResultScanner scanner = mailTable.getScanner(scan);
 		ArrayList<Mail> inbox = new ArrayList<Mail>();
 		for (Result result : scanner) {
-		    inbox.add(new Mail(new String(result.getValue(Bytes.toBytes("sender"),Bytes.toBytes("name"))), null, null, null, null, null, new String(result.getValue(Bytes.toBytes("content"),Bytes.toBytes("subject"))), new String(result.getValue(Bytes.toBytes("content"),Bytes.toBytes("body"))), null, false));
+		    inbox.add(new Mail(new String(result.getValue(Bytes.toBytes("sender"),Bytes.toBytes("name"))), null, null, null, new Date(Longs.fromByteArray((result.getValue(Bytes.toBytes("meta"),Bytes.toBytes("send_time"))))), null, new String(result.getValue(Bytes.toBytes("content"),Bytes.toBytes("subject"))), new String(result.getValue(Bytes.toBytes("content"),Bytes.toBytes("body"))), null, false));
 		}
 		return inbox;
 	}
