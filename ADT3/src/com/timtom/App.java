@@ -19,7 +19,8 @@ public class App {
 
 		// commands
 		commandList.addCommand(new InsertMail());
-
+		commandList.addCommand(new Inbox());
+		
 		// Must be last
 		commandList.addCommand(new ExitCommand());
 

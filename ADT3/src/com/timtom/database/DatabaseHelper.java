@@ -7,6 +7,7 @@ import java.security.NoSuchAlgorithmException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import javax.sound.midi.SysexMessage;
 
@@ -17,9 +18,16 @@ import org.apache.hadoop.hbase.HTableDescriptor;
 import org.apache.hadoop.hbase.KeyValue;
 import org.apache.hadoop.hbase.MasterNotRunningException;
 import org.apache.hadoop.hbase.ZooKeeperConnectionException;
+import org.apache.hadoop.hbase.client.Delete;
+import org.apache.hadoop.hbase.client.Get;
 import org.apache.hadoop.hbase.client.HBaseAdmin;
 import org.apache.hadoop.hbase.client.HTable;
 import org.apache.hadoop.hbase.client.Put;
+import org.apache.hadoop.hbase.client.Result;
+import org.apache.hadoop.hbase.client.ResultScanner;
+import org.apache.hadoop.hbase.client.Scan;
+import org.apache.hadoop.hbase.filter.Filter;
+import org.apache.hadoop.hbase.filter.PrefixFilter;
 import org.apache.hadoop.hbase.util.Bytes;
 
 import com.timtom.model.Mail;
@@ -155,5 +163,57 @@ public class DatabaseHelper {
 		mailTable.flushCommits();
 	}
 	
+	public void getMail(String owner, Mail m)
+	{
+		try {
+			Get get = new Get(m.getKey(owner));
+			get.addFamily(content.getBytes());
+			get.addFamily(sender.getBytes());
+			Result r = mailTable.get(get);
+			
+		} catch (NoSuchAlgorithmException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 	
+	public ArrayList<Mail> getInbox(String owner) throws IOException, NoSuchAlgorithmException {
+		MessageDigest md = MessageDigest.getInstance("MD5");
+		md.update(owner.getBytes());
+		byte[] ownerHashed = md.digest();
+		md.reset();
+		byte[] prefix = Arrays.copyOfRange(ownerHashed, 0, ownerHashed.length < 20 ? ownerHashed.length : 20);
+		System.out.println(Arrays.toString(prefix));
+		Scan scan = new Scan();
+		Filter prefixFilter = new PrefixFilter(prefix);
+	    scan.setFilter(prefixFilter);
+		scan.addColumn(Bytes.toBytes("content"), Bytes.toBytes("subject"));
+		scan.addColumn(Bytes.toBytes("content"), Bytes.toBytes("body"));
+		ResultScanner scanner = mailTable.getScanner(scan);
+		ArrayList<Mail> inbox = new ArrayList<Mail>();
+		for (Result result : scanner) {
+		    inbox.add(new Mail(null, null, null, null, null, null, new String(result.getValue(Bytes.toBytes("content"),Bytes.toBytes("subject"))), new String(result.getValue(Bytes.toBytes("content"),Bytes.toBytes("body"))), null, false));
+		}
+		return inbox;
+	}
+	
+	public void removeMail(String owner, Mail mail)
+	{
+		try {
+			Delete delete = new Delete(mail.getKey(owner));
+			
+			mailTable.delete(delete);
+			
+			mailTable.flushCommits();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (NoSuchAlgorithmException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 }

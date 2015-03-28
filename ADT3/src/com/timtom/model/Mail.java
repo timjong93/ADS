@@ -47,8 +47,6 @@ public class Mail {
 		this.read = read;
 	}
 
-
-
 	public Mail() {
 		this.sendTime = new Date();
 	}
@@ -79,4 +77,8 @@ public class Mail {
 		return total;
 	}
 	
+	public String toString(){
+		return "Subject: \t"+this.subject+"\nmail: \t"+this.mailBody+ "\n--------------------------------------\n";
+		
+	}
 }
