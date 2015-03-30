@@ -7,6 +7,8 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import org.apache.hadoop.hbase.client.Result;
+import org.apache.hadoop.hbase.util.Bytes;
 import org.apache.hadoop.hdfs.util.ByteArray;
 import org.hsqldb.Database;
 
@@ -76,6 +78,11 @@ public class Mail {
 		System.arraycopy(senderHashed, 0, total, 20 + timebytes.length, senderHashed.length < 20 ? senderHashed.length : 20);
 		
 		return total;
+	}
+	
+	public static Mail parseResult(Result result)
+	{
+		return new Mail(new String(result.getValue(Bytes.toBytes("sender"),Bytes.toBytes("name"))), null, null, null, new Date(Longs.fromByteArray((result.getValue(Bytes.toBytes("meta"),Bytes.toBytes("send_time"))))), null, new String(result.getValue(Bytes.toBytes("content"),Bytes.toBytes("subject"))), new String(result.getValue(Bytes.toBytes("content"),Bytes.toBytes("body"))), null, false);
 	}
 	
 	public String toString(){

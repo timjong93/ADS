@@ -4,14 +4,17 @@ import java.io.File;
 import java.io.IOException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.sql.ResultSet;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
+import java.util.List;
 import java.util.Map.Entry;
 import java.util.NavigableMap;
 
+import javax.servlet.FilterChain;
 import javax.sound.midi.SysexMessage;
 
 import org.apache.hadoop.conf.Configuration;
@@ -29,8 +32,14 @@ import org.apache.hadoop.hbase.client.Put;
 import org.apache.hadoop.hbase.client.Result;
 import org.apache.hadoop.hbase.client.ResultScanner;
 import org.apache.hadoop.hbase.client.Scan;
+import org.apache.hadoop.hbase.filter.CompareFilter;
+import org.apache.hadoop.hbase.filter.CompareFilter.CompareOp;
 import org.apache.hadoop.hbase.filter.Filter;
+import org.apache.hadoop.hbase.filter.FilterList;
+import org.apache.hadoop.hbase.filter.FilterList.Operator;
 import org.apache.hadoop.hbase.filter.PrefixFilter;
+import org.apache.hadoop.hbase.filter.SingleColumnValueFilter;
+import org.apache.hadoop.hbase.filter.SubstringComparator;
 import org.apache.hadoop.hbase.util.Bytes;
 
 import com.google.common.primitives.Longs;
@@ -203,7 +212,7 @@ public class DatabaseHelper {
 		byte[] ownerHashed = md.digest();
 		md.reset();
 		byte[] prefix = Arrays.copyOfRange(ownerHashed, 0, ownerHashed.length < 20 ? ownerHashed.length : 20);
-		System.out.println(Arrays.toString(prefix));
+		
 		Scan scan = new Scan();
 		Filter prefixFilter = new PrefixFilter(prefix);
 	    scan.setFilter(prefixFilter);
@@ -214,7 +223,7 @@ public class DatabaseHelper {
 		ResultScanner scanner = mailTable.getScanner(scan);
 		ArrayList<Mail> inbox = new ArrayList<Mail>();
 		for (Result result : scanner) {
-		    inbox.add(new Mail(new String(result.getValue(Bytes.toBytes("sender"),Bytes.toBytes("name"))), null, null, null, new Date(Longs.fromByteArray((result.getValue(Bytes.toBytes("meta"),Bytes.toBytes("send_time"))))), null, new String(result.getValue(Bytes.toBytes("content"),Bytes.toBytes("subject"))), new String(result.getValue(Bytes.toBytes("content"),Bytes.toBytes("body"))), null, false));
+		    inbox.add(Mail.parseResult(result));
 		}
 		return inbox;
 	}
@@ -234,5 +243,38 @@ public class DatabaseHelper {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
+	
+	public List<Mail> searchMail(String owner, String word) throws NoSuchAlgorithmException, IOException
+	{
+		List<Mail> results = new ArrayList<Mail>();
+		
+		MessageDigest md = MessageDigest.getInstance("MD5");
+		md.update(owner.getBytes());
+		byte[] ownerHashed = md.digest();
+		md.reset();
+		byte[] prefix = Arrays.copyOfRange(ownerHashed, 0, ownerHashed.length < 20 ? ownerHashed.length : 20);
+		
+		Scan scan = new Scan(prefix);
+		scan.addFamily(content.getBytes());
+		scan.addFamily(sender.getBytes());
+		scan.addFamily(recipients.getBytes());
+		scan.addFamily(meta.getBytes());
+		
+		
+		//FilterChain chain = new Filter
+		Filter filter1 = new SingleColumnValueFilter(content.getBytes(), Bytes.toBytes("subject"), CompareOp.EQUAL, new SubstringComparator(word));
+		Filter filter2 = new SingleColumnValueFilter(content.getBytes(), Bytes.toBytes("body"), CompareOp.EQUAL, new SubstringComparator(word));
+		FilterList fl = new FilterList(Operator.MUST_PASS_ONE, filter1,filter2);
+		scan.setFilter(fl);
+		
+		ResultScanner rs = mailTable.getScanner(scan);
+		
+		for(Result result : rs)
+		{
+			results.add(Mail.parseResult(result));
+		}
+		
+		return results;
 	}
 }

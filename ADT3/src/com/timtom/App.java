@@ -20,6 +20,7 @@ public class App {
 		// commands
 		commandList.addCommand(new InsertMail());
 		commandList.addCommand(new Inbox());
+		commandList.addCommand(new SearchMail());
 		commandList.addCommand(new DeleteMail());
 		commandList.addCommand(new ReplyMail());
 		
