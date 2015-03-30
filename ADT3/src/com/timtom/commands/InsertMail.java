@@ -31,8 +31,7 @@ public class InsertMail extends Command {
 				list.add(line);
 			}
 		}
-		mail.recievers = new String[list.size()];
-		list.toArray(mail.recievers);
+		mail.recievers = list;
 
 		System.out.println("enter CC recipients (empty line breaks the loop)");
 		list = new ArrayList<String>();
@@ -44,8 +43,7 @@ public class InsertMail extends Command {
 				list.add(line);
 			}
 		}
-		mail.ccRecievers = new String[list.size()];
-		list.toArray(mail.ccRecievers);
+		mail.ccRecievers = list;
 
 		System.out.println("enter BCC recipients (empty line breaks the loop)");
 		list = new ArrayList<String>();
@@ -57,8 +55,7 @@ public class InsertMail extends Command {
 				list.add(line);
 			}
 		}
-		mail.bccRecievers = new String[list.size()];
-		list.toArray(mail.bccRecievers);
+		mail.bccRecievers = list;
 		
 		System.out.println("Subject:");
 		mail.subject = scanner.nextLine();

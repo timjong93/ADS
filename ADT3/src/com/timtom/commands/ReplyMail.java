@@ -3,6 +3,7 @@ package com.timtom.commands;
 import java.io.File;
 import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.Scanner;
 
@@ -31,9 +32,9 @@ public class ReplyMail extends Command {
 		m.sender = sender;
 		m.sendTime = new Date(tijd);
 		
-		DatabaseHelper.getDatabaseHelper().getMail(owner, m);
+		m = DatabaseHelper.getDatabaseHelper().getMail(owner, m);
 		
-		if(m.recievers == null || m.recievers.length == 0)
+		if(m.recievers == null)
 		{
 			System.out.println("Mail not found");
 			return 1;
@@ -44,9 +45,10 @@ public class ReplyMail extends Command {
 		System.out.println("reply body:");
 		String s = scanner.nextLine();
 		
-		String recievers[] = {sender};
+		ArrayList<String> recievers = new ArrayList<String>();
+		recievers.add(m.sender);
 		
-		Mail reply = new Mail(owner, recievers, new String[0], new String[0], new File[0], "RE:" + m.subject, s + "\n++++++ Reply on:\n" + m.mailBody, "", false);
+		Mail reply = new Mail(owner,recievers , new ArrayList<String>(), new ArrayList<String>(), new File[0], "RE:" + m.subject, s + "\n++++++ Reply on:\n" + m.mailBody, "", false);
 		
 		try {
 			DatabaseHelper.getDatabaseHelper().insertMail(reply);

@@ -23,6 +23,7 @@ public class App {
 		commandList.addCommand(new SearchMail());
 		commandList.addCommand(new DeleteMail());
 		commandList.addCommand(new ReplyMail());
+		commandList.addCommand(new SearchContacts());
 		
 		// Must be last
 		commandList.addCommand(new ExitCommand());

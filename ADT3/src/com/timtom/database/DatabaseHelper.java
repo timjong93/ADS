@@ -10,9 +10,11 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map.Entry;
 import java.util.NavigableMap;
+import java.util.Set;
 
 import javax.servlet.FilterChain;
 import javax.sound.midi.SysexMessage;
@@ -52,11 +54,11 @@ public class DatabaseHelper {
 	private HTable mailTable;
 	public DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
 	
-	private static final String recipients = "recipients";
-	private static final String sender = "sender";
-	private static final String content = "content";
-	private static final String meta = "meta";
-	private static final String attachements = "attachements";
+	public static final String recipients = "recipients";
+	public static final String sender = "sender";
+	public static final String content = "content";
+	public static final String meta = "meta";
+	public static final String attachements = "attachements";
 	
 	private DatabaseHelper() {
 		conf = HBaseConfiguration.create();
@@ -130,21 +132,21 @@ public class DatabaseHelper {
 	public void insertMail(Mail mail) throws NoSuchAlgorithmException, IOException
 	{
 		ArrayList<Put> puts = new ArrayList<Put>(); 
-		for (int i = 0; i < mail.recievers.length + mail.ccRecievers.length + mail.bccRecievers.length; i++)
+		for (int i = 0; i < mail.recievers.size() + mail.ccRecievers.size() + mail.bccRecievers.size(); i++)
 		{
 			Put put = new Put();
 			
-			if(i < mail.recievers.length)
+			if(i < mail.recievers.size())
 			{
-				put = new Put(mail.getKey(mail.recievers[i]));
-			}else if (i < mail.recievers.length + mail.ccRecievers.length)
+				put = new Put(mail.getKey(mail.recievers.get(i)));
+			}else if (i < mail.recievers.size() + mail.ccRecievers.size())
 			{
-				put = new Put(mail.getKey(mail.ccRecievers[i - mail.recievers.length]));
+				put = new Put(mail.getKey(mail.ccRecievers.get(i - mail.recievers.size())));
 			}
 			else
 			{
-				put = new Put(mail.getKey(mail.bccRecievers[i - (mail.recievers.length + mail.ccRecievers.length)]));
-				put.add(Bytes.toBytes(recipients), Bytes.toBytes(mail.bccRecievers[i - (mail.recievers.length + mail.ccRecievers.length)]), Bytes.toBytes("BCC"));
+				put = new Put(mail.getKey(mail.bccRecievers.get(i - (mail.recievers.size() + mail.ccRecievers.size()))));
+				put.add(Bytes.toBytes(recipients), Bytes.toBytes(mail.bccRecievers.get(i - (mail.recievers.size() + mail.ccRecievers.size()))), Bytes.toBytes("BCC"));
 			}
 			
 			for(String s : mail.recievers)
@@ -176,27 +178,17 @@ public class DatabaseHelper {
 		mailTable.flushCommits();
 	}
 	
-	public void getMail(String owner, Mail m)
+	public Mail getMail(String owner, Mail m)
 	{
 		try {
 			Get get = new Get(m.getKey(owner));
 			get.addFamily(content.getBytes());
 			get.addFamily(sender.getBytes());
 			get.addFamily(recipients.getBytes());
+			get.addFamily(meta.getBytes());
 			Result result = mailTable.get(get);
-			ArrayList<String> recievers = new ArrayList<String>();
-			for(Entry<byte[], byte[]> entry : result.getFamilyMap(recipients.getBytes()).entrySet())
-			{
-				if(new String(entry.getValue()).equals("REC"))
-				{
-					recievers.add(new String(entry.getKey()));
-				}
-			}
-			m.recievers = new String[recievers.size()];
-			recievers.toArray(m.recievers);
 			
-			m.subject = new String(result.getValue(Bytes.toBytes("content"),Bytes.toBytes("subject")));
-			m.mailBody = new String(result.getValue(Bytes.toBytes("content"),Bytes.toBytes("body")));
+			return Mail.parseResult(result);
 		} catch (NoSuchAlgorithmException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -204,6 +196,7 @@ public class DatabaseHelper {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		return null;
 	}
 	
 	public ArrayList<Mail> getInbox(String owner) throws IOException, NoSuchAlgorithmException {
@@ -275,5 +268,37 @@ public class DatabaseHelper {
 		}
 		
 		return results;
+	}
+	
+	public List<String> searchContacts(String owner) throws IOException, NoSuchAlgorithmException
+	{
+		Set<String> results = new HashSet<String>();
+		
+		Scan scan = new Scan();
+		scan.addFamily(recipients.getBytes());
+		Filter filter1 = new SingleColumnValueFilter(sender.getBytes(), Bytes.toBytes("name"), CompareOp.EQUAL, owner.getBytes());
+		scan.setFilter(filter1);
+		
+		scan.addFamily(recipients.getBytes());
+		scan.addFamily(sender.getBytes());
+		
+		ResultScanner rs = mailTable.getScanner(scan);
+		
+		for(Result result : rs)
+		{
+			Mail m = Mail.parseResult(result);
+			results.addAll(m.recievers);
+			results.addAll(m.ccRecievers);
+			results.addAll(m.bccRecievers);
+		}
+		
+		ArrayList<Mail> mails = getInbox(owner);
+		
+		for(Mail m : mails)
+		{
+			results.add(m.sender);
+		}
+		
+		return new ArrayList<String>(results);
 	}
 }
