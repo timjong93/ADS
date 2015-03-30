@@ -261,7 +261,6 @@ public class DatabaseHelper {
 		scan.addFamily(recipients.getBytes());
 		scan.addFamily(meta.getBytes());
 		
-		
 		//FilterChain chain = new Filter
 		Filter filter1 = new SingleColumnValueFilter(content.getBytes(), Bytes.toBytes("subject"), CompareOp.EQUAL, new SubstringComparator(word));
 		Filter filter2 = new SingleColumnValueFilter(content.getBytes(), Bytes.toBytes("body"), CompareOp.EQUAL, new SubstringComparator(word));
