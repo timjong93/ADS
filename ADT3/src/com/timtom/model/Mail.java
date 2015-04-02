@@ -74,10 +74,10 @@ public class Mail {
 		
 		timebytes = Longs.toByteArray(sendTime.getTime());
 		
-		total = new byte[40 + timebytes.length];
-		System.arraycopy(recieverHashed, 0, total, 0, recieverHashed.length < 20 ? recieverHashed.length : 20);
-		System.arraycopy(recieverHashed, 0, total, 20, timebytes.length);
-		System.arraycopy(senderHashed, 0, total, 20 + timebytes.length, senderHashed.length < 20 ? senderHashed.length : 20);
+		total = new byte[32 + timebytes.length];
+		System.arraycopy(recieverHashed, 0, total, 0, 16);
+		System.arraycopy(timebytes, 0, total, 16, timebytes.length);
+		System.arraycopy(senderHashed, 0, total, 16 + timebytes.length, 16);
 		
 		return total;
 	}
@@ -95,7 +95,7 @@ public class Mail {
 			//nothin
 		}
 		
-		for(Entry<byte[], byte[]> entry : result.getFamilyMap(DatabaseHelper.recipients.getBytes()).entrySet())
+		for(Entry<byte[], byte[]> entry : result.getFamilyMap(DatabaseHelper.RECIPIENTS.getBytes()).entrySet())
 		{
 			if(new String(entry.getValue()).equals("REC"))
 			{
@@ -112,25 +112,24 @@ public class Mail {
 		}
 		
 		m.sendTime = date;
-		m.sender = new String(result.getValue(Bytes.toBytes(DatabaseHelper.sender),Bytes.toBytes("name")));
+		m.sender = new String(result.getValue(Bytes.toBytes(DatabaseHelper.SENDER),Bytes.toBytes("name")));
 		
-		try
-		{
+		if(result.getValue(Bytes.toBytes("content"),Bytes.toBytes("subject"))!=null){
 			m.subject = new String(result.getValue(Bytes.toBytes("content"),Bytes.toBytes("subject")));
+		}else{
+			m.subject = "-";
+		}
+		if(result.getValue(Bytes.toBytes("content"),Bytes.toBytes("body"))!=null){
 			m.mailBody = new String(result.getValue(Bytes.toBytes("content"),Bytes.toBytes("body")));
+		}else{
+			m.mailBody = "-";
 		}
-		catch(NullPointerException e)
-		{
-			
-		}
-		try
-		{
+		if(result.getValue(Bytes.toBytes("meta"),Bytes.toBytes("label"))!=null){
 			m.label = new String(result.getValue(Bytes.toBytes("meta"),Bytes.toBytes("label")));
+		}else{
+			m.label = "-";
 		}
-		catch(NullPointerException e)
-		{
-			
-		}
+
 		return m;
 	}
 	

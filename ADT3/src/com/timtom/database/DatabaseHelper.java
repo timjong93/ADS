@@ -55,11 +55,11 @@ public class DatabaseHelper {
 	private HTable mailTable;
 	public DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
 
-	public static final String recipients = "recipients";
-	public static final String sender = "sender";
-	public static final String content = "content";
-	public static final String meta = "meta";
-	public static final String attachements = "attachements";
+	public static final String RECIPIENTS = "recipients";
+	public static final String SENDER = "sender";
+	public static final String CONTENT = "content";
+	public static final String META = "meta";
+	public static final String ATTACHEMENTS = "attachements";
 
 	private DatabaseHelper() {
 		conf = HBaseConfiguration.create();
@@ -91,11 +91,11 @@ public class DatabaseHelper {
 	public boolean createTable() {
 		try {
 			HTableDescriptor tableDescriptor = new HTableDescriptor("Mail");
-			tableDescriptor.addFamily(new HColumnDescriptor(recipients));
-			tableDescriptor.addFamily(new HColumnDescriptor(sender));
-			tableDescriptor.addFamily(new HColumnDescriptor(content));
-			tableDescriptor.addFamily(new HColumnDescriptor(meta));
-			tableDescriptor.addFamily(new HColumnDescriptor(attachements));
+			tableDescriptor.addFamily(new HColumnDescriptor(RECIPIENTS));
+			tableDescriptor.addFamily(new HColumnDescriptor(SENDER));
+			tableDescriptor.addFamily(new HColumnDescriptor(CONTENT));
+			tableDescriptor.addFamily(new HColumnDescriptor(META));
+			tableDescriptor.addFamily(new HColumnDescriptor(ATTACHEMENTS));
 			admin.createTable(tableDescriptor);
 			return true;
 		} catch (MasterNotRunningException e) {
@@ -125,48 +125,53 @@ public class DatabaseHelper {
 	public void insertMail(Mail mail) throws NoSuchAlgorithmException,
 			IOException {
 		ArrayList<Put> puts = new ArrayList<Put>();
+		// For each type of receiver (normal/cc or bcc) do: 
 		for (int i = 0; i < mail.recievers.size() + mail.ccRecievers.size()
 				+ mail.bccRecievers.size(); i++) {
 			Put put = null;
-
+			// if we are still handling normal receivers do to get the receiver out of the correct array:
 			if (i < mail.recievers.size()) {
 				put = new Put(mail.getKey(mail.recievers.get(i)));
-			} else if (i < mail.recievers.size() + mail.ccRecievers.size()) {
+			} 
+			// if we are handling cc receivers do this to get the receiver out of the correct array:
+			else if (i < mail.recievers.size() + mail.ccRecievers.size()) {
 				put = new Put(mail.getKey(mail.ccRecievers.get(i
 						- mail.recievers.size())));
-			} else {
+			} 
+			// finally if we are handling bcc receivers do this to get the receiver out of the correct array:
+			else {
 				put = new Put(mail.getKey(mail.bccRecievers.get(i
 						- (mail.recievers.size() + mail.ccRecievers.size()))));
-				put.add(Bytes.toBytes(recipients),
+				put.add(Bytes.toBytes(RECIPIENTS),
 						Bytes.toBytes(mail.bccRecievers.get(i
 								- (mail.recievers.size() + mail.ccRecievers
 										.size()))), Bytes.toBytes("BCC"));
 			}
 
 			for (String s : mail.recievers) {
-				put.add(Bytes.toBytes(recipients), Bytes.toBytes(s),
+				put.add(Bytes.toBytes(RECIPIENTS), Bytes.toBytes(s),
 						Bytes.toBytes("REC"));
 			}
 			for (String s : mail.ccRecievers) {
-				put.add(Bytes.toBytes(recipients), Bytes.toBytes(s),
+				put.add(Bytes.toBytes(RECIPIENTS), Bytes.toBytes(s),
 						Bytes.toBytes("CC"));
 			}
 
-			put.add(Bytes.toBytes(sender), Bytes.toBytes("name"),
+			put.add(Bytes.toBytes(SENDER), Bytes.toBytes("name"),
 					Bytes.toBytes(mail.sender));
 
-			put.add(Bytes.toBytes(content), Bytes.toBytes("subject"),
+			put.add(Bytes.toBytes(CONTENT), Bytes.toBytes("subject"),
 					Bytes.toBytes(mail.subject));
-			put.add(Bytes.toBytes(content), Bytes.toBytes("body"),
+			put.add(Bytes.toBytes(CONTENT), Bytes.toBytes("body"),
 					Bytes.toBytes(mail.mailBody));
 
-			put.add(Bytes.toBytes(meta), Bytes.toBytes("send_time"),
+			put.add(Bytes.toBytes(META), Bytes.toBytes("send_time"),
 					Longs.toByteArray(mail.sendTime.getTime()));
-			put.add(Bytes.toBytes(meta), Bytes.toBytes("read"),
+			put.add(Bytes.toBytes(META), Bytes.toBytes("read"),
 					Bytes.toBytes(false));
 
 			for (File f : mail.attachements) {
-				put.add(Bytes.toBytes(attachements),
+				put.add(Bytes.toBytes(ATTACHEMENTS),
 						Bytes.toBytes(f.getName()),
 						Bytes.toBytes(f.getAbsolutePath()));
 			}
@@ -181,10 +186,10 @@ public class DatabaseHelper {
 	public Mail getMail(String owner, Mail m) {
 		try {
 			Get get = new Get(m.getKey(owner));
-			get.addFamily(content.getBytes());
-			get.addFamily(sender.getBytes());
-			get.addFamily(recipients.getBytes());
-			get.addFamily(meta.getBytes());
+			get.addFamily(CONTENT.getBytes());
+			get.addFamily(SENDER.getBytes());
+			get.addFamily(RECIPIENTS.getBytes());
+			get.addFamily(META.getBytes());
 			Result result = mailTable.get(get);
 
 			return Mail.parseResult(result);
@@ -214,7 +219,7 @@ public class DatabaseHelper {
 		scan.addColumn(Bytes.toBytes("meta"), Bytes.toBytes("send_time"));
 		scan.addColumn(Bytes.toBytes("content"), Bytes.toBytes("subject"));
 		scan.addColumn(Bytes.toBytes("content"), Bytes.toBytes("body"));
-		scan.addFamily(meta.getBytes());
+		scan.addFamily(META.getBytes());
 
 		ResultScanner scanner = mailTable.getScanner(scan);
 		ArrayList<Mail> inbox = new ArrayList<Mail>();
@@ -252,16 +257,16 @@ public class DatabaseHelper {
 				ownerHashed.length < 20 ? ownerHashed.length : 20);
 
 		Scan scan = new Scan(prefix);
-		scan.addFamily(content.getBytes());
-		scan.addFamily(sender.getBytes());
-		scan.addFamily(recipients.getBytes());
-		scan.addFamily(meta.getBytes());
+		scan.addFamily(CONTENT.getBytes());
+		scan.addFamily(SENDER.getBytes());
+		scan.addFamily(RECIPIENTS.getBytes());
+		scan.addFamily(META.getBytes());
 
 		// FilterChain chain = new Filter
-		Filter filter1 = new SingleColumnValueFilter(content.getBytes(),
+		Filter filter1 = new SingleColumnValueFilter(CONTENT.getBytes(),
 				Bytes.toBytes("subject"), CompareOp.EQUAL,
 				new SubstringComparator(word));
-		Filter filter2 = new SingleColumnValueFilter(content.getBytes(),
+		Filter filter2 = new SingleColumnValueFilter(CONTENT.getBytes(),
 				Bytes.toBytes("body"), CompareOp.EQUAL,
 				new SubstringComparator(word));
 		FilterList fl = new FilterList(Operator.MUST_PASS_ONE, filter1, filter2);
@@ -281,13 +286,13 @@ public class DatabaseHelper {
 		Set<String> results = new HashSet<String>();
 
 		Scan scan = new Scan();
-		scan.addFamily(recipients.getBytes());
-		Filter filter1 = new SingleColumnValueFilter(sender.getBytes(),
+		scan.addFamily(RECIPIENTS.getBytes());
+		Filter filter1 = new SingleColumnValueFilter(SENDER.getBytes(),
 				Bytes.toBytes("name"), CompareOp.EQUAL, owner.getBytes());
 		scan.setFilter(filter1);
 
-		scan.addFamily(recipients.getBytes());
-		scan.addFamily(sender.getBytes());
+		scan.addFamily(RECIPIENTS.getBytes());
+		scan.addFamily(SENDER.getBytes());
 
 		ResultScanner rs = mailTable.getScanner(scan);
 
@@ -334,4 +339,20 @@ public class DatabaseHelper {
 		}
 		return result;
 	}
+
+	public int nrOfSendMails(String owner) throws NoSuchAlgorithmException,
+			IOException {
+		Scan scan = new Scan();
+		Filter filter1 = new SingleColumnValueFilter(SENDER.getBytes(),
+				Bytes.toBytes("name"), CompareOp.EQUAL, owner.getBytes());
+		scan.setFilter(filter1);
+		
+		ResultScanner scanner = mailTable.getScanner(scan);
+		int result = 0;
+		for (Result r : scanner) {
+			result++;
+		}
+		return result;
+	}
+
 }
