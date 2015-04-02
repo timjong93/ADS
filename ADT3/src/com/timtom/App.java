@@ -25,6 +25,7 @@ public class App {
 		commandList.addCommand(new ReplyMail());
 		commandList.addCommand(new SearchContacts());
 		commandList.addCommand(new ChangeLabel());
+		commandList.addCommand(new NrOfMailsReceived());
 
 		
 		// Must be last
