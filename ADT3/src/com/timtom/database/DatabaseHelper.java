@@ -143,7 +143,7 @@ public class DatabaseHelper {
 			}else if (i < mail.recievers.size() + mail.ccRecievers.size())
 			{
 				put = new Put(mail.getKey(mail.ccRecievers.get(i - mail.recievers.size())));
-			{
+			}
 			else
 			{
 				put = new Put(mail.getKey(mail.bccRecievers.get(i - (mail.recievers.size() + mail.ccRecievers.size()))));
