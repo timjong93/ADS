@@ -133,7 +133,6 @@ public class DatabaseHelper {
 	public void insertMail(Mail mail) throws NoSuchAlgorithmException, IOException
 	{
 		ArrayList<Put> puts = new ArrayList<Put>(); 
-		byte[] rowkey = null;
 		for (int i = 0; i < mail.recievers.size() + mail.ccRecievers.size() + mail.bccRecievers.size(); i++)
 		{
 			Put put = null;
@@ -141,17 +140,14 @@ public class DatabaseHelper {
 			if(i < mail.recievers.size())
 			{
 				put = new Put(mail.getKey(mail.recievers.get(i)));
-				rowkey = mail.getKey(mail.recievers.get(i));
 			}else if (i < mail.recievers.size() + mail.ccRecievers.size())
 			{
 				put = new Put(mail.getKey(mail.ccRecievers.get(i - mail.recievers.size())));
-				rowkey = mail.getKey(mail.ccRecievers.get(i - mail.recievers.size()));
-			}
+			{
 			else
 			{
 				put = new Put(mail.getKey(mail.bccRecievers.get(i - (mail.recievers.size() + mail.ccRecievers.size()))));
 				put.add(Bytes.toBytes(recipients), Bytes.toBytes(mail.bccRecievers.get(i - (mail.recievers.size() + mail.ccRecievers.size()))), Bytes.toBytes("BCC"));
-				rowkey = mail.getKey(mail.bccRecievers.get(i - (mail.recievers.size() + mail.ccRecievers.size())));
 			}
 			
 			for(String s : mail.recievers)
@@ -181,17 +177,6 @@ public class DatabaseHelper {
 		
 		mailTable.put(puts);
 		mailTable.flushCommits();
-		
-		Get get = new Get(rowkey);
-		Result res = mailTable.get(get);
-		
-		for(org.apache.hadoop.hbase.KeyValue kv : res.raw()){
-            System.out.print(new String(kv.getRow()) + " " );
-            System.out.print(new String(kv.getFamily()) + ":" );
-            System.out.print(new String(kv.getQualifier()) + " " );
-            System.out.print(kv.getTimestamp() + " " );
-            System.out.println(new String(kv.getValue()));
-        }
 	}
 	
 	public Mail getMail(String owner, Mail m)
@@ -322,8 +307,6 @@ public class DatabaseHelper {
 	
 	public void setLabel(String owner, Mail mail, String label) throws IOException, NoSuchAlgorithmException{
 		   Put put = new Put(mail.getKey(owner));
-		   System.out.println(Arrays.toString(mail.getKey(owner)));
-		   System.out.println(label);
 		   put.add(Bytes.toBytes("meta"), Bytes.toBytes("label"), Bytes.toBytes(label));
 		   mailTable.put(put);
 		   mailTable.flushCommits();

@@ -1,4 +1,4 @@
-package com.timtom;
+﻿package com.timtom;
 
 import java.util.Scanner;
 
@@ -25,6 +25,7 @@ public class App {
 		commandList.addCommand(new ReplyMail());
 		commandList.addCommand(new SearchContacts());
 		commandList.addCommand(new ChangeLabel());
+
 		
 		// Must be last
 		commandList.addCommand(new ExitCommand());

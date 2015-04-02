@@ -123,7 +123,6 @@ public class Mail {
 		{
 			
 		}
-		
 		try
 		{
 			m.label = new String(result.getValue(Bytes.toBytes("meta"),Bytes.toBytes("label")));
@@ -132,12 +131,10 @@ public class Mail {
 		{
 			
 		}
-		
 		return m;
 	}
 	
 	public String toString(){
-		return "Sender: \t"+this.sender+"\nSend: \t"+this.sendTime+" (" + this.sendTime.getTime() + ")"+ "\nLabel: \t"+ this.label + "\nSubject: \t"+this.subject+"\nmail: \t"+this.mailBody+ "\n--------------------------------------\n";
-		
+		return "Sender: \t"+this.sender+"\nSend: \t"+this.sendTime+" (" + this.sendTime.getTime() + ")"+ "\nLabel: \t"+ this.label + "\nSubject: \t"+this.subject+"\nmail: \t"+this.mailBody+ "\n--------------------------------------\n";		
 	}
 }
