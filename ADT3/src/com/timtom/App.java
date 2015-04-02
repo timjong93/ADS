@@ -20,6 +20,11 @@ public class App {
 		// commands
 		commandList.addCommand(new InsertMail());
 		commandList.addCommand(new Inbox());
+		commandList.addCommand(new SearchMail());
+		commandList.addCommand(new DeleteMail());
+		commandList.addCommand(new ReplyMail());
+		commandList.addCommand(new SearchContacts());
+		commandList.addCommand(new ChangeLabel());
 		
 		// Must be last
 		commandList.addCommand(new ExitCommand());
@@ -27,7 +32,9 @@ public class App {
 	}
 
 	public void printWelcomeText() {
-		System.out.println("Welcome to the Recepies System.");
+		System.out.println(" ▄▄▄▄▄▄▄▄▄▄▄  ▄▄▄▄▄▄▄▄▄▄▄  ▄▄       ▄▄  ▄▄▄▄▄▄▄▄▄▄▄ \n▐░░░░░░░░░░░▌▐░░░░░░░░░░░▌▐░░▌     ▐░░▌▐░░░░░░░░░░░▌\n▐░█▀▀▀▀▀▀▀▀▀  ▀▀▀▀█░█▀▀▀▀ ▐░▌░▌   ▐░▐░▌▐░█▀▀▀▀▀▀▀▀▀ \n▐░▌               ▐░▌     ▐░▌▐░▌ ▐░▌▐░▌▐░▌          \n▐░█▄▄▄▄▄▄▄▄▄      ▐░▌     ▐░▌ ▐░▐░▌ ▐░▌▐░█▄▄▄▄▄▄▄▄▄ \n▐░░░░░░░░░░░▌     ▐░▌     ▐░▌  ▐░▌  ▐░▌▐░░░░░░░░░░░▌\n ▀▀▀▀▀▀▀▀▀█░▌     ▐░▌     ▐░▌   ▀   ▐░▌ ▀▀▀▀▀▀▀▀▀█░▌\n          ▐░▌     ▐░▌     ▐░▌       ▐░▌          ▐░▌\n ▄▄▄▄▄▄▄▄▄█░▌ ▄▄▄▄█░█▄▄▄▄ ▐░▌       ▐░▌ ▄▄▄▄▄▄▄▄▄█░▌\n▐░░░░░░░░░░░▌▐░░░░░░░░░░░▌▐░▌       ▐░▌▐░░░░░░░░░░░▌\n ▀▀▀▀▀▀▀▀▀▀▀  ▀▀▀▀▀▀▀▀▀▀▀  ▀         ▀  ▀▀▀▀▀▀▀▀▀▀▀ \n                                                    ");
+		System.out.println("Welcome to the SIMS.");
+		System.out.println("(Saxion Internal Mailing System)");
 	}
 
 	public void execute() {

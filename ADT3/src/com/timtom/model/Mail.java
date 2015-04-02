@@ -5,19 +5,24 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.Map.Entry;
 
+import org.apache.hadoop.hbase.client.Result;
+import org.apache.hadoop.hbase.util.Bytes;
 import org.apache.hadoop.hdfs.util.ByteArray;
 import org.hsqldb.Database;
 
+import com.google.common.primitives.Longs;
 import com.timtom.database.DatabaseHelper;
 
 public class Mail {
 
 	public String sender;
-	public String[] recievers;
-	public String[] ccRecievers;
-	public String[] bccRecievers;
+	public ArrayList<String> recievers = new ArrayList<String>();
+	public ArrayList<String> ccRecievers = new ArrayList<String>();
+	public ArrayList<String> bccRecievers = new ArrayList<String>();
 	public Date sendTime;
 	public File[] attachements;
 	public String subject;
@@ -25,13 +30,13 @@ public class Mail {
 	public String label;
 	public boolean read;
 	
-	public Mail(String sender, String[] recievers, String[] ccRecievers,String[] bccRecievers,
+	public Mail(String sender, ArrayList<String> recievers,ArrayList<String> ccRecievers,ArrayList<String> bccRecievers,
 			File[] attachements, String subject,
 			String mailBody, String label, boolean read) {
 		this(sender,recievers,ccRecievers,bccRecievers, new Date(), attachements, subject, mailBody, label, read);
 	}
 	
-	public Mail(String sender, String[] recievers, String[] ccRecievers, String[] bccRecievers,
+	public Mail(String sender, ArrayList<String> recievers, ArrayList<String> ccRecievers, ArrayList<String> bccRecievers,
 			Date sendTime, File[] attachements, String subject,
 			String mailBody, String label, boolean read) {
 		super();
@@ -67,7 +72,7 @@ public class Mail {
 		md.update(reciever.getBytes());
 		recieverHashed = md.digest();
 		
-		timebytes = DatabaseHelper.getDatabaseHelper().dateFormat.format(sendTime).getBytes();
+		timebytes = Longs.toByteArray(sendTime.getTime());
 		
 		total = new byte[40 + timebytes.length];
 		System.arraycopy(recieverHashed, 0, total, 0, recieverHashed.length < 20 ? recieverHashed.length : 20);
@@ -77,8 +82,62 @@ public class Mail {
 		return total;
 	}
 	
+	public static Mail parseResult(Result result)
+	{
+		Mail m = new Mail();
+		Date date = null;
+		
+		try{
+			date = new Date(Longs.fromByteArray((result.getValue(Bytes.toBytes("meta"),Bytes.toBytes("send_time")))));
+		}
+		catch(Exception e)
+		{
+			//nothin
+		}
+		
+		for(Entry<byte[], byte[]> entry : result.getFamilyMap(DatabaseHelper.recipients.getBytes()).entrySet())
+		{
+			if(new String(entry.getValue()).equals("REC"))
+			{
+				m.recievers.add(new String(entry.getKey()));
+			}
+			else if(new String(entry.getValue()).equals("CC"))
+			{
+				m.ccRecievers.add(new String(entry.getKey()));
+			}
+			else
+			{
+				m.bccRecievers.add(new String(entry.getKey()));
+			}
+		}
+		
+		m.sendTime = date;
+		m.sender = new String(result.getValue(Bytes.toBytes(DatabaseHelper.sender),Bytes.toBytes("name")));
+		
+		try
+		{
+			m.subject = new String(result.getValue(Bytes.toBytes("content"),Bytes.toBytes("subject")));
+			m.mailBody = new String(result.getValue(Bytes.toBytes("content"),Bytes.toBytes("body")));
+		}
+		catch(NullPointerException e)
+		{
+			
+		}
+		
+		try
+		{
+			m.label = new String(result.getValue(Bytes.toBytes("meta"),Bytes.toBytes("label")));
+		}
+		catch(NullPointerException e)
+		{
+			
+		}
+		
+		return m;
+	}
+	
 	public String toString(){
-		return "Subject: \t"+this.subject+"\nmail: \t"+this.mailBody+ "\n--------------------------------------\n";
+		return "Sender: \t"+this.sender+"\nSend: \t"+this.sendTime+" (" + this.sendTime.getTime() + ")"+ "\nLabel: \t"+ this.label + "\nSubject: \t"+this.subject+"\nmail: \t"+this.mailBody+ "\n--------------------------------------\n";
 		
 	}
 }
